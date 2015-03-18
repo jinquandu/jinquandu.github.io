@@ -1,93 +1,360 @@
-<!DOCTYPE html>
+
+
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
   
   <title>Du&#39;s blog</title>
+  <meta name="author" content="dujinquan">
+  
+  <meta name="description" content="Du&#39;s blog">
+  
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Du's blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Du's blog">
-<meta property="og:url" content="http://yoursite.com/">
-<meta property="og:site_name" content="Du's blog">
-<meta property="og:description" content="Du's blog">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Du's blog">
-<meta name="twitter:description" content="Du's blog">
 
   
-    <link rel="alternative" href="/atom.xml" title="Du&#39;s blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <meta property="og:site_name" content="Du&#39;s blog"/>
 
   
+    <meta property="og:image" content="undefined"/>
+  
 
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Du&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
 </head>
+
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Du&#39;s blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Walk steps step by step</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Du&#39;s blog</a></h1>
+  <h2><a href="/">Walk step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
   
-    <article id="post-Factory-DesignPattern-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/03/10/Factory-DesignPattern-2/" class="article-date">
-  <time datetime="2015-03-10T15:48:57.000Z" itemprop="datePublished">3月 10 2015</time>
-</a>
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
     
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/10/Factory-DesignPattern-2/">工厂方法模式</a>
-    </h1>
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-18T13:55:32.000Z"><a href="/2015/03/18/linux-shell-chmod/">3月 18 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/18/linux-shell-chmod/">linux shell chmod</a></h1>
   
 
-      </header>
+    </header>
+    <div class="entry">
+      
+        <p>chmod [options] mode files</p>
+<p>只能文件属主或特权用户才能使用该功能来改变文件存取模式。mode可以是数字形式或以who opcode permission形式表示。who是可选的，默认是a(所有用户)。只能选择一个opcode(操作码)。可指定多个mode，以逗号分开。</p>
+<p>options：</p>
+<p>-c，—changes<br>只输出被改变文件的信息</p>
+<p>-f，—silent，—quiet<br>当chmod不能改变文件模式时，不通知文件的用户</p>
+<p>—help<br>输出帮助信息。</p>
+<p>-R，—recursive<br>可递归遍历子目录，把修改应到目录下所有文件和子目录</p>
+<p>—reference=filename<br>参照filename的权限来设置权限</p>
+<p>-v，—verbose<br>无论修改是否成功，输出每个文件的信息</p>
+<p>—version<br>输出版本信息。</p>
+<p>who</p>
+<p>u<br>用户</p>
+<p>g<br>组</p>
+<p>o<br>其它</p>
+<p>a<br>所有用户(默认)</p>
+<p>opcode</p>
+<p>+<br>增加权限</p>
+<p>-<br>删除权限</p>
+<p>=<br>重新分配权限</p>
+<p>permission</p>
+<p>r<br>读</p>
+<p>w<br>写</p>
+<p>x<br>执行</p>
+<p>s<br>设置用户(或组)的ID号</p>
+<p>t<br>设置粘着位(sticky bit)，防止文件或目录被非属主删除</p>
+<p>u<br>用户的当前权限</p>
+<p>g<br>组的当前权限</p>
+<p>o<br>其他用户的当前权限</p>
+<p>作为选择，我们多数用三位八进制数字的形式来表示权限，第一位指定属主的权限，第二位指定组权限，第三位指定其他用户的权限，每位通过4(读)、2(写)、1(执行)三种数值的和来确定权限。如6(4+2)代表有读写权，7(4+2+1)有读、写和执行的权限。</p>
+<p>还可设置第四位，它位于三位权限序列的前面，第四位数字取值是4，2，1，代表意思如下：</p>
+<p>4，执行时设置用户ID，用于授权给基于文件属主的进程，而不是给创建此进程的用户。</p>
+<p>2，执行时设置用户组ID，用于授权给基于文件所在组的进程，而不是基于创建此进程的用户。</p>
+<p>1，设置粘着位。</p>
+<p>实例：</p>
+<p>$ chmod u+x file                　　　   给file的属主增加执行权限<br>$ chmod 751 file                　　　   给file的属主分配读、写、执行(7)的权限，给file的所在组分配读、执行(5)的权限，给其他用户分配执行(1)的权限<br>$ chmod u=rwx,g=rx,o=x file      上例的另一种形式<br>$ chmod =r file                 　　　　为所有用户分配读权限<br>$ chmod 444 file              　　　　 同上例<br>$ chmod a-wx,a+r   file   　　 　   同上例<br>$ chmod -R u+r directory       　   递归地给directory目录下所有文件和子目录的属主分配读的权限<br>$ chmod 4755                          　　设置用ID，给属主分配读、写和执行权限，给组和其他用户分配读、执行的权限。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
     
-    <div class="article-entry" itemprop="articleBody">
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-11T15:49:52.000Z"><a href="/2015/03/11/Factory-DesignPattern-3/">3月 11 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/11/Factory-DesignPattern-3/">抽象工厂模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>具体情形：这个肥皂厂发现搞牙膏也很赚钱，决定做牙膏。牙膏有高档低档，肥皂也是。现在搞两个厂房，一个生产低档的牙膏和肥皂，一个生产高档的牙膏和肥皂。<br>比如，厂房一生产中华牙膏、娜爱斯肥皂，厂房二生产黑人牙膏和舒肤佳牙膏<br><img src="/img/Factory-DesignPattern-3" alt="UML图"><br>对于上面的结构图，可以看出抽象工厂模式，比前两者更为的复杂和一般性，抽象工厂模式和工厂方法模式的区别就在于需要创建对象的复杂程度上。<br>抽象工厂模式：给客户端提供一个接口，可以创建多个产品族中的产品对象 ，而且使用抽象工厂模式还要满足一下条件：<br>1)系统中有多个产品族，而系统一次只可能消费其中一族产品。<br>2)同属于同一个产品族的产品以其使用。<br>抽象工厂模式的组成（和工厂方法模式一样）：<br>1)抽象工厂角色：这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。<br>2)具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。<br>3)抽象产品角色：它是具体产品继承的父类或者是实现的接口。<br>4)具体产品角色：具体工厂角色所创建的对象就是此角色的实例。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">enum</span> SOAPTYPE {SFJ,XSL,NAS};</div><div class="line"><span class="keyword">enum</span> TOOTHTYPE {HR,ZH};</div><div class="line"></div><div class="line"><span class="keyword">class</span> SoapBase</div><div class="line">{</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="keyword">virtual</span> ~SoapBase(){};</div><div class="line">	<span class="keyword">virtual</span> <span class="keyword">void</span> show() = <span class="number">0</span>;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> SFJSoap:<span class="keyword">public</span> SoapBase</div><div class="line">{</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="keyword">void</span> show() {<span class="built_in">cout</span>&lt;&lt;<span class="string">"SFJ Soap!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> NASSoap:<span class="keyword">public</span> SoapBase</div><div class="line">{</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="keyword">void</span> show() {<span class="built_in">cout</span>&lt;&lt;<span class="string">"NAS Soap!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> ToothBase</div><div class="line">{</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="keyword">virtual</span> ~ToothBase(){};</div><div class="line">	<span class="keyword">virtual</span> <span class="keyword">void</span> show() = <span class="number">0</span>;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> HRTooth:<span class="keyword">public</span> ToothBase</div><div class="line">{</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="keyword">void</span> show() {<span class="built_in">cout</span>&lt;&lt;<span class="string">"Hei ren Toothpaste!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> ChinaTooth:<span class="keyword">public</span> ToothBase</div><div class="line">{</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="keyword">void</span> show() {<span class="built_in">cout</span>&lt;&lt;<span class="string">"China Toothpaste!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> FactoryBase</div><div class="line">{</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="keyword">virtual</span> SoapBase * creatSoap() = <span class="number">0</span>;</div><div class="line">	<span class="keyword">virtual</span> ToothBase * creatToothpaste() = <span class="number">0</span>;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> FactoryA</div><div class="line">{</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	SoapBase * creatSoap()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> SFJSoap();</div><div class="line">	}</div><div class="line">	</div><div class="line">	ToothBase * creatToothpaste()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> HRTooth();</div><div class="line">	}</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> FactoryB</div><div class="line">{</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	SoapBase * creatSoap()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> NASSoap();</div><div class="line">	}</div><div class="line">	</div><div class="line">	ToothBase * creatToothpaste()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ChinaTooth();</div><div class="line">	}</div><div class="line">};</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	FactoryA factory1;</div><div class="line">	FactoryB factory2;</div><div class="line">	SoapBase *pSoap1 = NULL;</div><div class="line">	ToothBase *pToothpaste1 = NULL;</div><div class="line">	pSoap1 = factory1.creatSoap();</div><div class="line">	pToothpaste1 = factory1.creatToothpaste();</div><div class="line">	pSoap1-&gt;show();</div><div class="line">	pToothpaste1-&gt;show();</div><div class="line">	</div><div class="line">	SoapBase *pSoap2 = NULL;</div><div class="line">	ToothBase *pToothpaste2 = NULL;</div><div class="line">	pSoap2 = factory2.creatSoap();</div><div class="line">	pToothpaste2 = factory2.creatToothpaste();</div><div class="line">	pSoap2-&gt;show();</div><div class="line">	pToothpaste2-&gt;show();</div><div class="line">	</div><div class="line">	<span class="keyword">delete</span> pSoap1;</div><div class="line">	<span class="keyword">delete</span> pSoap2;</div><div class="line">	<span class="keyword">delete</span> pToothpaste1;</div><div class="line">	<span class="keyword">delete</span> pToothpaste2;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>运行结果:<br><img src="/img/Factory-DesignPattern-3-2" alt=""></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-10T15:48:57.000Z"><a href="/2015/03/10/Factory-DesignPattern-2/">3月 10 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/10/Factory-DesignPattern-2/">工厂方法模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
       
         <p>具体情形：最近莫名肥皂需求激增!！ 于是要独立每个生产线，每个生产线只生产一种肥皂。<br><img src="http://img.blog.csdn.net/20140305103041500" alt="UML图"></p>
 <p> 其实这才是真正的工厂模式，简单工厂模式只能算是“坑爹版”的工厂模式。我们能很容易看出工厂方法模式和简单工厂模式的区别之处。工厂方法模式的应用并不是只是为了封装对象的创建，而是要把对象的创建放到子类中实现：Factory中只是提供了对象创建的接口，其实现将放在Factory的子类ConcreteFactory中进行。<br>对于工厂方法模式的组成：<br>1)抽象工厂角色： 这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。<br>2)具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。<br>3)抽象产品角色：它是具体产品继承的父类或者是实现的接口。<br>4)具体产品角色：具体工厂角色所创建的对象就是此角色的实例。<br>缺点：每增加一种产品，就需要增加一个对象的工厂。如果这家公司发展迅速，推出了很多新的处理器核，那么就要开设相应的新工厂。在C++实现中，就是要定义一个个的工厂类。显然，相比简单工厂模式，工厂方法模式需要更多的类定义。<br>代码实现：</p>
@@ -97,38 +364,46 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/03/10/Factory-DesignPattern-2/" data-id="n89jk7fc0562tn0t" class="article-share-link">Share</a>
+    <footer>
       
+        
+        
       
+      <div class="clearfix"></div>
     </footer>
   </div>
-  
 </article>
 
 
+
+
+  <article class="post">
   
-    <article id="post-Factory-DesignPattern" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/03/09/Factory-DesignPattern/" class="article-date">
-  <time datetime="2015-03-09T15:08:03.000Z" itemprop="datePublished">3月 9 2015</time>
-</a>
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
     
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/09/Factory-DesignPattern/">简单工厂模式</a>
-    </h1>
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-09T15:08:03.000Z"><a href="/2015/03/09/Factory-DesignPattern/">3月 9 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/09/Factory-DesignPattern/">简单工厂模式</a></h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+    </header>
+    <div class="entry">
       
         <h2 id="引出工厂模式的设计问题">引出工厂模式的设计问题</h2>
 <p>1.为了提高内聚（Cohesion）和松耦合（Coupling），我们经常会抽象出一些类的公共接口以形成抽象基类或者接口。这样我们可以通过声明一个指向基类的指针来指向实际的子类实现，达到了多态的目的。这里很容易出现的一个问题 n 多的子类继承自抽象基类，我们不得不在每次要用到子类的地方就编写诸如 new ×××;的代码。这里带来两个问题：<br>客户程序员必须知道实际子类的名称（当系统复杂后，命名将是一个很不好处理的问题，为了处理可能的名字冲突，有的命名可能并不是具有很好的可读性和可记忆性，就姑且不论不同程序员千奇百怪的个人偏好了）。<br>程序的扩展性和维护变得越来越困难。<br>2.还有一种情况就是在父类中并不知道具体要实例化哪一个具体的子类。这里的意思为：假设我们在类 A 中要使用到类 B，B 是一个抽象父类，在 A 中并不知道具体要实例化那一个 B 的子类，但是在类 A 的子类 D 中是可以知道的。在 A 中我们没有办法直接使用类似于 new ×××的语句，因为根本就不知道×××是什么。<br>以上两个问题也就引出了工厂模式的两个最重要的功能：<br>定义创建对象的接口，封装了对象的创建；<br>使得具体化类的工作延迟到了子类中。<br>对于工厂模式，为了使其能更好的解决多种情况的问题，将其分为三类：简单工厂模式（Simple Factory），工厂方法模式（Factory Method），抽象工厂模式（Abstract Factory）。下面来一一搞定。</p>
@@ -140,40 +415,46 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/03/09/Factory-DesignPattern/" data-id="m45r9dzgnhvijn71" class="article-share-link">Share</a>
+    <footer>
       
+        
+        
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-技术/">C++ 技术</a></li></ul>
-
+      <div class="clearfix"></div>
     </footer>
   </div>
-  
 </article>
 
 
+
+
+  <article class="post">
   
-    <article id="post-plan" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/03/09/plan/" class="article-date">
-  <time datetime="2015-03-09T05:02:47.000Z" itemprop="datePublished">3月 9 2015</time>
-</a>
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
     
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/09/plan/">计划</a>
-    </h1>
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-09T05:02:47.000Z"><a href="/2015/03/09/plan/">3月 9 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/09/plan/">计划</a></h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+    </header>
+    <div class="entry">
       
         <p>最近感觉自己像死了一样。事情有很多，但自己却懒于去做。<br>主要是缺少一个明确的计划和实施计划的执行力。<br>生活其实可以变得更好一些。</p>
 <h2 id="工作">工作</h2>
@@ -185,238 +466,109 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/03/09/plan/" data-id="egocv5ojec22dt6i" class="article-share-link">Share</a>
+    <footer>
       
+        
+        
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心情/">心情</a></li></ul>
-
+      <div class="clearfix"></div>
     </footer>
   </div>
-  
 </article>
 
 
-  
-    <article id="post-my-new-post" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/03/04/my-new-post/" class="article-date">
-  <time datetime="2015-03-04T03:58:11.000Z" itemprop="datePublished">3月 4 2015</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/04/my-new-post/">怎样使用Markdown</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>单个回车<br>视为空格。</p>
-<p>连续回车</p>
-<p>才能分段。</p>
-<p>行尾加两个空格，这里-&gt;<br>即可段内换行。</p>
-<p><em>这些文字显示为斜体</em></p>
-<p><strong>这些文字显示为粗体</strong></p>
-<blockquote>
-<p>表示引用文字内容。</p>
-</blockquote>
-<h1 id="表示这是一级标题">表示这是一级标题</h1>
-<h2 id="表示这是二级标题">表示这是二级标题</h2>
-<h3 id="表示这是三级标题">表示这是三级标题</h3>
-<p>……</p>
-<h6 id="最小是六级标题">最小是六级标题</h6>
-<p>也可以这样表示大标题<br>=</p>
-<p>这样表示小标题<br>-</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//这里显示一些代码，在正文显示中会自动识别语言，进行代码染色，这是一段C<span class="comment">#代码</span></div><div class="line">public class Blog</div><div class="line">{</div><div class="line">     public int Id { get; <span class="keyword">set</span>; }</div><div class="line">     public string Subject { get; <span class="keyword">set</span>; }</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>C#:</p>
-<pre><code><span class="comment">//这里显示一些代码，在正文显示中会自动识别语言，进行代码染色，这是一段C#代码</span>
-<span class="keyword">public</span> <span class="keyword">class</span> Blog
-{
-     <span class="keyword">public</span> <span class="keyword">int</span> Id { <span class="keyword">get</span>; <span class="keyword">set</span>; }
-     <span class="keyword">public</span> <span class="keyword">string</span> Subject { <span class="keyword">get</span>; <span class="keyword">set</span>; }
-}
-</code></pre><p>直接把一个URL显示为超级连接：</p>
-<p>也可以这样：<a href="http://www.ituring.com.cn" target="_blank" rel="external">图灵社区</a></p>
-<p>图像和链接非常类似，区别在开头加一个惊叹号： <img src="http://www.turingbook.com/Content/img/Turing.Gif" alt="这是一个Logo图像"></p>
-<p>此外，还可以以索引方式把url都列在文章的最后，例如这样：</p>
-<p><a href="http://www.ituring.com.cn" target="_blank" rel="external">图灵社区</a><br><img src="http://www.ituring.com.cn/Content/img/Turing.Gif" alt="图灵社区Logo"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/03/04/my-new-post/" data-id="ro9qir4zkkh1skga" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
 
 
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/03/03/hello-world/" class="article-date">
-  <time datetime="2015-03-03T15:04:35.060Z" itemprop="datePublished">3月 3 2015</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/03/hello-world/">Hello World</a>
-    </h1>
-  
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2>
-<h3 id="Create_a_new_post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/03/03/hello-world/" data-id="jsf7g7uvw38ng9tl" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
+<nav id="pagination">
   
   
-</section>
-        
-          <aside id="sidebar">
+    <a href="/page/2/" class="alignright next">下一页</a>
   
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-技术/">C++ 技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/C-技术/" style="font-size: 20.00px;">C++ 技术</a><a href="/tags/C-技术/" style="font-size: 10.00px;">C++,技术</a><a href="/tags/心情/" style="font-size: 20.00px;">心情</a>
-    </div>
-  </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">5</span></li></ul>
-    </div>
-  </div>
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：赵伟</li>
+<li>二次元：zippera | moxie</li>
+<li>现状：帝都CS在读研究生</li>
+<li>Theme: <a href="https://github.com/zippera/lightum">Lightum</a>
+<li>想交友的朋友请<a href="http://zipperary.com/about">联系我</a>！</li>
+<li>QQ 号：763987114</li>
+<font color="red">Hexo 交流群：287306637</font>
+</ul>
+</div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2015/03/10/Factory-DesignPattern-2/">工厂方法模式</a>
-          </li>
-        
-          <li>
-            <a href="/2015/03/09/Factory-DesignPattern/">简单工厂模式</a>
-          </li>
-        
-          <li>
-            <a href="/2015/03/09/plan/">计划</a>
-          </li>
-        
-          <li>
-            <a href="/2015/03/04/my-new-post/">怎样使用Markdown</a>
-          </li>
-        
-          <li>
-            <a href="/2015/03/03/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
 </aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2015 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
+    <div class="clearfix"></div>
   </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/zippera/lightum">Lightum</a>, Improved from <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
 
 
 
-<script src="/js/script.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
 
 
-  </div>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </body>
 </html>
+
+
+<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>
