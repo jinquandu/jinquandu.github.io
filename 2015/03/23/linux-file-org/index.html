@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>怎样使用Markdown | Du&#39;s blog</title>
+  <title>linux-file-org | Du&#39;s blog</title>
   <meta name="author" content="dujinquan">
   
   <meta name="description" content="Du&#39;s blog">
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="怎样使用Markdown"/>
+  <meta property="og:title" content="linux-file-org"/>
   <meta property="og:site_name" content="Du&#39;s blog"/>
 
   
@@ -218,46 +218,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-03-04T03:58:11.000Z"><a href="/2015/03/04/my-new-post/">3月 4 2015</a></time>
+        <time datetime="2015-03-23T15:13:42.000Z"><a href="/2015/03/23/linux-file-org/">3月 23 2015</a></time>
       
       
   
-    <h1 class="title">怎样使用Markdown</h1>
+    <h1 class="title">linux-file-org</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>单个回车<br>视为空格。</p>
-<p>连续回车</p>
-<p>才能分段。</p>
-<p>行尾加两个空格，这里-&gt;<br>即可段内换行。</p>
-<p><em>这些文字显示为斜体</em></p>
-<p><strong>这些文字显示为粗体</strong></p>
-<blockquote>
-<p>表示引用文字内容。</p>
-</blockquote>
-<h1 id="表示这是一级标题">表示这是一级标题</h1>
-<h2 id="表示这是二级标题">表示这是二级标题</h2>
-<h3 id="表示这是三级标题">表示这是三级标题</h3>
-<p>……</p>
-<h6 id="最小是六级标题">最小是六级标题</h6>
-<p>也可以这样表示大标题<br>=</p>
-<p>这样表示小标题<br>-</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//这里显示一些代码，在正文显示中会自动识别语言，进行代码染色，这是一段C<span class="comment">#代码</span></div><div class="line">public class Blog</div><div class="line">{</div><div class="line">     public int Id { get; <span class="keyword">set</span>; }</div><div class="line">     public string Subject { get; <span class="keyword">set</span>; }</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>C#:</p>
-<pre><code><span class="comment">//这里显示一些代码，在正文显示中会自动识别语言，进行代码染色，这是一段C#代码</span>
-<span class="keyword">public</span> <span class="keyword">class</span> Blog
-{
-     <span class="keyword">public</span> <span class="keyword">int</span> Id { <span class="keyword">get</span>; <span class="keyword">set</span>; }
-     <span class="keyword">public</span> <span class="keyword">string</span> Subject { <span class="keyword">get</span>; <span class="keyword">set</span>; }
-}
-</code></pre><p>直接把一个URL显示为超级连接：</p>
-<p>也可以这样：<a href="http://www.ituring.com.cn" target="_blank" rel="external">图灵社区</a></p>
-<p>图像和链接非常类似，区别在开头加一个惊叹号： <img src="http://www.turingbook.com/Content/img/Turing.Gif" alt="这是一个Logo图像"></p>
-<p>此外，还可以以索引方式把url都列在文章的最后，例如这样：</p>
-<p><a href="http://www.ituring.com.cn" target="_blank" rel="external">图灵社区</a><br><img src="http://www.ituring.com.cn/Content/img/Turing.Gif" alt="图灵社区Logo"></p>
+        <p>目录结构</p>
+<p>目录    描述<br>/    第一层次结构 的根、 整个文件系统层次结构的根目录。<br>/bin/    需要在单用户模式可用的必要命令（可执行文件）；面向所有用户，例如： cat、 ls、 cp。<br>/boot/    引导程序文件，例如： kernel、initrd；时常是一个单独的分区[6]<br>/dev/    必要设备, 例如：, /dev/null.<br>/etc/    特定主机，系统范围内的配置文件。<br>关于这个名称目前有争议。在贝尔实验室关于UNIX实现文档的早期版本中，/etc 被称为etcetera， [7] 这是由于过去此目录中存放所有不属于别处的所有东西（然而，FHS限制/etc存放静态配置文件，不能包含二进制文件）。 [8] 自从早期文档出版以来，目录名称已被以各种方式重新称呼。最近的解释包括反向缩略语如：”可编辑的文本配置”（英文 “Editable Text Configuration”）或”扩展工具箱”（英文 “Extended Tool Chest”)。 [9]</p>
+<p>/etc/opt/<br>/opt/的配置文件<br>/etc/X11/<br>X Window系统(版本11)的配置文件<br>/etc/sgml/<br>SGML的配置文件<br>/etc/xml/<br>XML的配置文件<br>/home/    用户的家目录，包含保存的文件、个人设置等，一般为单独的分区。<br>/lib/    /bin/ 和 /sbin/中二进制文件必要的库文件。<br>/media/    可移除媒体(如CD-ROM)的挂载点<br>/mnt/    临时挂载的文件系统。<br>/opt/    可选应用软件 包<br>/proc/    虚拟文件系统，将内核与进程状态归档为文本文件。例如：uptime、 network。在Linux中，对应Procfs格式挂载。<br>/root/    超级用户的家目录<br>/sbin/    必要的系统二进制文件，例如： init、 ip、 mount。<br>/srv/    站点的具体数据，由系统提供。<br>/tmp/    临时文件(参见 /var/tmp)，在系统重启时目录中文件不会被保留。<br>/usr/    用于存储只读用户数据的第二层次； 包含绝大多数的(多)用户工具和应用程序。[11]<br>/usr/bin/<br>非必要可执行文件 (在单用户模式中不需要)；面向所有用户。<br>/usr/include/<br>标准包含文件。<br>/usr/lib/<br>/usr/bin/和/usr/sbin/中二进制文件的库。<br>/usr/sbin/<br>非必要的系统二进制文件，例如：大量网络服务的守护进程。<br>/usr/share/<br>体系结构无关（共享）数据。<br>/usr/src/<br>源代码,例如:内核源代码及其头文件。<br>/usr/X11R6/<br>X Window系统 版本 11, Release 6.<br>/usr/local/<br>本地数据的第三层次， 具体到本台主机。通常而言有进一步的子目录， 例如：bin/、lib/、share/.</p>
+<p>/var/    变量文件——在正常运行的系统中其内容不断变化的文件，如日志，脱机文件和临时电子邮件文件。有时是一个单独的分区。<br>/var/cache/<br>应用程序缓存数据。这些数据是在本地生成的一个耗时的I/O或计算结果。应用程序必须能够再生或恢复数据。缓存的文件可以被删除而不导致数据丢失。<br>/var/lib/<br>状态信息。 由程序在运行时维护的持久性数据。 例如：数据库、包装的系统元数据等。<br>/var/lock/<br>锁文件，一类跟踪当前使用中资源的文件。<br>/var/log/<br>日志文件，包含大量日志文件。<br>/var/mail/<br>用户的电子邮箱。<br>/var/run/<br>自最后一次启动以来运行中的系统的信息，例如：当前登录的用户和运行中的守护进程。现已经被/run代替[13]。<br>/var/spool/<br>等待处理的任务的脱机文件，例如：打印队列和未读的邮件。<br>/var/spool/mail/<br>用户的邮箱(不鼓励的存储位置)<br>/var/tmp/<br>在系统重启过程中可以保留的临时文件。<br>/run<br>代替/var/run目录。</p>
 
       
     </div>
@@ -290,8 +264,10 @@ document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static
 
  <nav id="pagination" >
     
-    <a href="/2015/03/09/plan/" class="alignleft prev" >上一页</a>
+    <a href="/2015/03/23/网络常用协议/" class="alignleft prev" >上一页</a>
     
+    
+    <a href="/2015/03/23/lvmeng-interview/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
