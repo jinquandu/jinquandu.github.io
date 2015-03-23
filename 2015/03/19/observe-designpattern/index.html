@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Du&#39;s blog</title>
+  <title>观察者模式 | Du&#39;s blog</title>
   <meta name="author" content="dujinquan">
   
   <meta name="description" content="Du&#39;s blog">
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="观察者模式"/>
   <meta property="og:site_name" content="Du&#39;s blog"/>
 
   
@@ -200,8 +200,7 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
     <div class="gallery">
   <div class="photoset">
@@ -223,7 +222,7 @@
       
       
   
-    <h1 class="title"><a href="/2015/03/19/observe-designpattern/">观察者模式</a></h1>
+    <h1 class="title">观察者模式</h1>
   
 
     </header>
@@ -241,86 +240,22 @@
       
         
         
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
 </div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-18T13:55:32.000Z"><a href="/2015/03/18/linux-shell-chmod/">3月 18 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/18/linux-shell-chmod/">linux shell chmod</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>chmod [options] mode files</p>
-<p>只能文件属主或特权用户才能使用该功能来改变文件存取模式。mode可以是数字形式或以who opcode permission形式表示。who是可选的，默认是a(所有用户)。只能选择一个opcode(操作码)。可指定多个mode，以逗号分开。</p>
-<p>options：</p>
-<p>-c，—changes<br>只输出被改变文件的信息</p>
-<p>-f，—silent，—quiet<br>当chmod不能改变文件模式时，不通知文件的用户</p>
-<p>—help<br>输出帮助信息。</p>
-<p>-R，—recursive<br>可递归遍历子目录，把修改应到目录下所有文件和子目录</p>
-<p>—reference=filename<br>参照filename的权限来设置权限</p>
-<p>-v，—verbose<br>无论修改是否成功，输出每个文件的信息</p>
-<p>—version<br>输出版本信息。</p>
-<p>who</p>
-<p>u<br>用户</p>
-<p>g<br>组</p>
-<p>o<br>其它</p>
-<p>a<br>所有用户(默认)</p>
-<p>opcode</p>
-<p>+<br>增加权限</p>
-<p>-<br>删除权限</p>
-<p>=<br>重新分配权限</p>
-<p>permission</p>
-<p>r<br>读</p>
-<p>w<br>写</p>
-<p>x<br>执行</p>
-<p>s<br>设置用户(或组)的ID号</p>
-<p>t<br>设置粘着位(sticky bit)，防止文件或目录被非属主删除</p>
-<p>u<br>用户的当前权限</p>
-<p>g<br>组的当前权限</p>
-<p>o<br>其他用户的当前权限</p>
-<p>作为选择，我们多数用三位八进制数字的形式来表示权限，第一位指定属主的权限，第二位指定组权限，第三位指定其他用户的权限，每位通过4(读)、2(写)、1(执行)三种数值的和来确定权限。如6(4+2)代表有读写权，7(4+2+1)有读、写和执行的权限。</p>
-<p>还可设置第四位，它位于三位权限序列的前面，第四位数字取值是4，2，1，代表意思如下：</p>
-<p>4，执行时设置用户ID，用于授权给基于文件属主的进程，而不是给创建此进程的用户。</p>
-<p>2，执行时设置用户组ID，用于授权给基于文件所在组的进程，而不是基于创建此进程的用户。</p>
-<p>1，设置粘着位。</p>
-<p>实例：</p>
-<p>$ chmod u+x file                　　　   给file的属主增加执行权限<br>$ chmod 751 file                　　　   给file的属主分配读、写、执行(7)的权限，给file的所在组分配读、执行(5)的权限，给其他用户分配执行(1)的权限<br>$ chmod u=rwx,g=rx,o=x file      上例的另一种形式<br>$ chmod =r file                 　　　　为所有用户分配读权限<br>$ chmod 444 file              　　　　 同上例<br>$ chmod a-wx,a+r   file   　　 　   同上例<br>$ chmod -R u+r directory       　   递归地给directory目录下所有文件和子目录的属主分配读的权限<br>$ chmod 4755                          　　设置用ID，给属主分配读、写和执行权限，给组和其他用户分配读、执行的权限。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
       <div class="clearfix"></div>
     </footer>
   </div>
@@ -328,243 +263,37 @@
 
 
 
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
+ <nav id="pagination" >
     
-      <img src="">
     
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-13T06:57:44.000Z"><a href="/2015/03/13/lsh/">3月 13 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/13/lsh/">局部敏感哈希（LSH）</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Goal">Goal</h1>
-<blockquote>
-<p>Finding Similar Items</p>
-</blockquote>
-<ul>
-<li>在高维空间上找到那些相近的元素。比如，在做微博文本挖掘的时候，会发现很多微博是高度相似的，因为大量的微博都是转发其他人的微博，并且没有添加评论，导致很多数据是重复或者高度相似的。这给我们进行数据处理带来很大的困扰，我们得想办法把找出这些相似的微博，再对其进行去重处理。<br><img src="/img/lsh1.png" alt="Finding Similar Documents"></li>
-</ul>
-<h1 id="Steps">Steps</h1>
-<p><img src="/img/lsh2.png" alt="Essebtial Steps For Similar Docs"></p>
-<h2 id="Shingling">Shingling</h2>
-<h2 id="Min-Hashing">Min-Hashing</h2>
-<blockquote>
-<p>Convert large sets to short signatures, while preserving similarity.<br><img src="/img/lsh4.png" alt=""><br><img src="/img/lsh5.png" alt=""></p>
-</blockquote>
-<h2 id="LSH">LSH</h2>
-<blockquote>
-<p>General idea: Use a function f(x,y) that tells whether x and y is a candidate pair: a pair of elements whose similarity must be evaluated</p>
-</blockquote>
-<p>我们对签名矩阵按行进行分组，将矩阵分成b组，每组由r行组成.</p>
-<p><img src="/img/lsh6.png" alt=""></p>
-<p>分组之后，我们对最小签名向量的每一组进行hash，各个组设置不同的桶空间。只要两列有一组的最小签名部分相同，那么这两列就会hash到同一个桶而成为候选相似项。签名的分析我们知道，对于某个具体的行，两个签名相同的概率p =两列的相似度= sim(S1,S2)，然后：</p>
-<ol>
-<li><p>在某个组中所有行的两个签名值都相等概率是p^r;</p>
-</li>
-<li><p>在某个组中至少有一对签名不相等的概率是1−p^r;</p>
-</li>
-<li><p>在每一组中至少有一对签名不相等的概率是(1−p^r)^b;</p>
-</li>
-<li><p>至少有一个组的所有对的签名相等的概率是1−(1−p^r)^b;</p>
-</li>
-</ol>
-<p>于是两列成为候选相似对的概率是1−(1−p^r)^b，它采样值以及曲线如下：<br><img src="/img/lsh7.png" alt="r=5,b=20"></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
+    <a href="/2015/03/18/linux-shell-chmod/" class="alignright next" >下一页</a>
     
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
   
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-13T06:57:44.000Z"><a href="/2015/03/13/lsh/">3月 13 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/13/lsh/">局部敏感哈希（LSH）</a></h1>
-  
+</section>
 
-    </header>
-    <div class="entry">
-      
-        <h1 id="Goal">Goal</h1>
-<blockquote>
-<p>Finding Similar Items</p>
-</blockquote>
-<ul>
-<li>在高维空间上找到那些相近的元素。比如，在做微博文本挖掘的时候，会发现很多微博是高度相似的，因为大量的微博都是转发其他人的微博，并且没有添加评论，导致很多数据是重复或者高度相似的。这给我们进行数据处理带来很大的困扰，我们得想办法把找出这些相似的微博，再对其进行去重处理。<br><img src="/img/lsh1.png" alt="Finding Similar Documents"></li>
-</ul>
-<h1 id="Steps">Steps</h1>
-<p><img src="/img/lsh2.png" alt="Essebtial Steps For Similar Docs"></p>
-<h2 id="Shingling">Shingling</h2>
-<h2 id="Min-Hashing">Min-Hashing</h2>
-<blockquote>
-<p>Convert large sets to short signatures, while preserving similarity.<br><img src="/img/lsh4.png" alt=""><br><img src="/img/lsh5.png" alt=""></p>
-</blockquote>
-<h2 id="LSH">LSH</h2>
-<blockquote>
-<p>General idea: Use a function f(x,y) that tells whether x and y is a candidate pair: a pair of elements whose similarity must be evaluated</p>
-</blockquote>
-<p>我们对签名矩阵按行进行分组，将矩阵分成b组，每组由r行组成.</p>
-<p><img src="/img/lsh6.png" alt=""></p>
-<p>分组之后，我们对最小签名向量的每一组进行hash，各个组设置不同的桶空间。只要两列有一组的最小签名部分相同，那么这两列就会hash到同一个桶而成为候选相似项。签名的分析我们知道，对于某个具体的行，两个签名相同的概率p =两列的相似度= sim(S1,S2)，然后：</p>
-<ol>
-<li><p>在某个组中所有行的两个签名值都相等概率是p^r;</p>
-</li>
-<li><p>在某个组中至少有一对签名不相等的概率是1−p^r;</p>
-</li>
-<li><p>在每一组中至少有一对签名不相等的概率是(1−p^r)^b;</p>
-</li>
-<li><p>至少有一个组的所有对的签名相等的概率是1−(1−p^r)^b;</p>
-</li>
-</ol>
-<p>于是两列成为候选相似对的概率是1−(1−p^r)^b，它采样值以及曲线如下：<br><img src="/img/lsh7.png" alt="r=5,b=20"></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-13T06:57:44.000Z"><a href="/2015/03/13/lsh/">3月 13 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/13/lsh/">局部敏感哈希（LSH）</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Goal">Goal</h1>
-<blockquote>
-<p>Finding Similar Items</p>
-</blockquote>
-<ul>
-<li>在高维空间上找到那些相近的元素。比如，在做微博文本挖掘的时候，会发现很多微博是高度相似的，因为大量的微博都是转发其他人的微博，并且没有添加评论，导致很多数据是重复或者高度相似的。这给我们进行数据处理带来很大的困扰，我们得想办法把找出这些相似的微博，再对其进行去重处理。<br><img src="/img/lsh1.png" alt="Finding Similar Documents"></li>
-</ul>
-<h1 id="Steps">Steps</h1>
-<p><img src="/img/lsh2.png" alt="Essebtial Steps For Similar Docs"></p>
-<h2 id="Shingling">Shingling</h2>
-<h2 id="Min-Hashing">Min-Hashing</h2>
-<blockquote>
-<p>Convert large sets to short signatures, while preserving similarity.<br><img src="/img/lsh4.png" alt=""><br><img src="/img/lsh5.png" alt=""></p>
-</blockquote>
-<h2 id="LSH">LSH</h2>
-<blockquote>
-<p>General idea: Use a function f(x,y) that tells whether x and y is a candidate pair: a pair of elements whose similarity must be evaluated</p>
-</blockquote>
-<p>我们对签名矩阵按行进行分组，将矩阵分成b组，每组由r行组成.</p>
-<p><img src="/img/lsh6.png" alt=""></p>
-<p>分组之后，我们对最小签名向量的每一组进行hash，各个组设置不同的桶空间。只要两列有一组的最小签名部分相同，那么这两列就会hash到同一个桶而成为候选相似项。签名的分析我们知道，对于某个具体的行，两个签名相同的概率p =两列的相似度= sim(S1,S2)，然后：</p>
-<ol>
-<li><p>在某个组中所有行的两个签名值都相等概率是p^r;</p>
-</li>
-<li><p>在某个组中至少有一对签名不相等的概率是1−p^r;</p>
-</li>
-<li><p>在每一组中至少有一对签名不相等的概率是(1−p^r)^b;</p>
-</li>
-<li><p>至少有一个组的所有对的签名相等的概率是1−(1−p^r)^b;</p>
-</li>
-</ol>
-<p>于是两列成为候选相似对的概率是1−(1−p^r)^b，它采样值以及曲线如下：<br><img src="/img/lsh7.png" alt="r=5,b=20"></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-<nav id="pagination">
-  
-  
-    <a href="/page/2/" class="alignright next">下一页</a>
-  
-  <div class="clearfix"></div>
-</nav></div></div>
+</div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">

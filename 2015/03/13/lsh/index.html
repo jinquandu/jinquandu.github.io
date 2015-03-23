@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>工厂方法模式 | Du&#39;s blog</title>
+  <title>局部敏感哈希（LSH） | Du&#39;s blog</title>
   <meta name="author" content="dujinquan">
   
   <meta name="description" content="Du&#39;s blog">
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="工厂方法模式"/>
+  <meta property="og:title" content="局部敏感哈希（LSH）"/>
   <meta property="og:site_name" content="Du&#39;s blog"/>
 
   
@@ -218,21 +218,48 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-03-10T15:48:57.000Z"><a href="/2015/03/10/Factory-DesignPattern-2/">3月 10 2015</a></time>
+        <time datetime="2015-03-13T06:57:44.000Z"><a href="/2015/03/13/lsh/">3月 13 2015</a></time>
       
       
   
-    <h1 class="title">工厂方法模式</h1>
+    <h1 class="title">局部敏感哈希（LSH）</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>具体情形：最近莫名肥皂需求激增!！ 于是要独立每个生产线，每个生产线只生产一种肥皂。<br><img src="http://img.blog.csdn.net/20140305103041500" alt="UML图"></p>
-<p> 其实这才是真正的工厂模式，简单工厂模式只能算是“坑爹版”的工厂模式。我们能很容易看出工厂方法模式和简单工厂模式的区别之处。工厂方法模式的应用并不是只是为了封装对象的创建，而是要把对象的创建放到子类中实现：Factory中只是提供了对象创建的接口，其实现将放在Factory的子类ConcreteFactory中进行。<br>对于工厂方法模式的组成：<br>1)抽象工厂角色： 这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。<br>2)具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。<br>3)抽象产品角色：它是具体产品继承的父类或者是实现的接口。<br>4)具体产品角色：具体工厂角色所创建的对象就是此角色的实例。<br>缺点：每增加一种产品，就需要增加一个对象的工厂。如果这家公司发展迅速，推出了很多新的处理器核，那么就要开设相应的新工厂。在C++实现中，就是要定义一个个的工厂类。显然，相比简单工厂模式，工厂方法模式需要更多的类定义。<br>代码实现：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#include &lt;iostream&gt;</span></div><div class="line">using namespace std;</div><div class="line">enum SOAPTYPE {SFJ,XSL,NAS};</div><div class="line"></div><div class="line">class soapBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	virtual ~<span class="function"><span class="title">soapBase</span></span>(){};</div><div class="line">	virtual void show() = <span class="number">0</span>;</div><div class="line">};</div><div class="line"></div><div class="line">class SFJSoap:public soapBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	void <span class="function"><span class="title">show</span></span>() {cout&lt;&lt;<span class="string">"SFJ Soap!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line">class XSLSoap:public soapBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	void <span class="function"><span class="title">show</span></span>() {cout&lt;&lt;<span class="string">"XSL Soap!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line">class NASSoap:public soapBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	void <span class="function"><span class="title">show</span></span>() {cout&lt;&lt;<span class="string">"NAS Soap!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line">class FactoryBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	virtual soapBase * creatSoap() = <span class="number">0</span>;</div><div class="line">};</div><div class="line"></div><div class="line">class SFJFactory:public FactoryBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	soapBase * <span class="function"><span class="title">creatSoap</span></span>()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> new SFJSoap();</div><div class="line">	}</div><div class="line">};</div><div class="line"></div><div class="line">class XSLFactory:public FactoryBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	soapBase * <span class="function"><span class="title">creatSoap</span></span>()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> new XSLSoap();</div><div class="line">	}</div><div class="line">};</div><div class="line"></div><div class="line">class NASFactory:public FactoryBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	soapBase * <span class="function"><span class="title">creatSoap</span></span>()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> new NASSoap();</div><div class="line">	}</div><div class="line">};</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">int <span class="function"><span class="title">main</span></span>()</div><div class="line">{</div><div class="line">	SFJFactory factory1;</div><div class="line">	soapBase* pSoap1 = factory1.creatSoap();</div><div class="line">	pSoap1-&gt;show();</div><div class="line">	XSLFactory factory2;</div><div class="line">	soapBase* pSoap2 = factory2.creatSoap();</div><div class="line">	pSoap2-&gt;show();</div><div class="line">	NASFactory factory3;</div><div class="line">	soapBase* pSoap3 = factory3.creatSoap();</div><div class="line">	pSoap3-&gt;show();</div><div class="line">	delete pSoap1;</div><div class="line">	delete pSoap2;</div><div class="line">	delete pSoap3;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>运行结果:<br><img src="http://img.blog.csdn.net/20140305110043921" alt=""></p>
+        <h1 id="Goal">Goal</h1>
+<blockquote>
+<p>Finding Similar Items</p>
+</blockquote>
+<ul>
+<li>在高维空间上找到那些相近的元素。比如，在做微博文本挖掘的时候，会发现很多微博是高度相似的，因为大量的微博都是转发其他人的微博，并且没有添加评论，导致很多数据是重复或者高度相似的。这给我们进行数据处理带来很大的困扰，我们得想办法把找出这些相似的微博，再对其进行去重处理。<br><img src="/img/lsh1.png" alt="Finding Similar Documents"></li>
+</ul>
+<h1 id="Steps">Steps</h1>
+<p><img src="/img/lsh2.png" alt="Essebtial Steps For Similar Docs"></p>
+<h2 id="Shingling">Shingling</h2>
+<h2 id="Min-Hashing">Min-Hashing</h2>
+<blockquote>
+<p>Convert large sets to short signatures, while preserving similarity.<br><img src="/img/lsh4.png" alt=""><br><img src="/img/lsh5.png" alt=""></p>
+</blockquote>
+<h2 id="LSH">LSH</h2>
+<blockquote>
+<p>General idea: Use a function f(x,y) that tells whether x and y is a candidate pair: a pair of elements whose similarity must be evaluated</p>
+</blockquote>
+<p>我们对签名矩阵按行进行分组，将矩阵分成b组，每组由r行组成.</p>
+<p><img src="/img/lsh6.png" alt=""></p>
+<p>分组之后，我们对最小签名向量的每一组进行hash，各个组设置不同的桶空间。只要两列有一组的最小签名部分相同，那么这两列就会hash到同一个桶而成为候选相似项。签名的分析我们知道，对于某个具体的行，两个签名相同的概率p =两列的相似度= sim(S1,S2)，然后：</p>
+<ol>
+<li><p>在某个组中所有行的两个签名值都相等概率是p^r;</p>
+</li>
+<li><p>在某个组中至少有一对签名不相等的概率是1−p^r;</p>
+</li>
+<li><p>在每一组中至少有一对签名不相等的概率是(1−p^r)^b;</p>
+</li>
+<li><p>至少有一个组的所有对的签名相等的概率是1−(1−p^r)^b;</p>
+</li>
+</ol>
+<p>于是两列成为候选相似对的概率是1−(1−p^r)^b，它采样值以及曲线如下：<br><img src="/img/lsh7.png" alt="r=5,b=20"></p>
 
       
     </div>
@@ -240,6 +267,11 @@
       
         
         
+  
+  <div class="tags">
+    <a href="/tags/Massive-Datasets/">Massive Datasets</a>
+  </div>
+
 <!-- Baidu Button BEGIN -->
 <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
 <a class="bds_qzone"></a>
@@ -265,10 +297,10 @@ document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static
 
  <nav id="pagination" >
     
-    <a href="/2015/03/11/Factory-DesignPattern-3/" class="alignleft prev" >上一页</a>
+    <a href="/2015/03/13/lsh/" class="alignleft prev" >上一页</a>
     
     
-    <a href="/2015/03/10/hash/" class="alignright next" >下一页</a>
+    <a href="/2015/03/11/Factory-DesignPattern-3/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
