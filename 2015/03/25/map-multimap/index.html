@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>python进程与线程 | Du&#39;s blog</title>
+  <title>map/multimap | Du&#39;s blog</title>
   <meta name="author" content="dujinquan">
   
   <meta name="description" content="Du&#39;s blog">
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="python进程与线程"/>
+  <meta property="og:title" content="map/multimap"/>
   <meta property="og:site_name" content="Du&#39;s blog"/>
 
   
@@ -218,23 +218,51 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-03-23T15:15:08.000Z"><a href="/2015/03/23/python进程与线程/">3月 23 2015</a></time>
+        <time datetime="2015-03-25T12:39:45.000Z"><a href="/2015/03/25/map-multimap/">3月 25 2015</a></time>
       
       
   
-    <h1 class="title">python进程与线程</h1>
+    <h1 class="title">map/multimap</h1>
   
 
     </header>
     <div class="entry">
       
-        
+        <blockquote>
+<p>使用map/multimap之前要加入头文件#include<map>,map和multimap将key/value当作元素，进行管理。它们可根据key的排序准则自动将元素排序。multimap允许重复元素，map不允许重复元素。</map></p>
+</blockquote>
+<p><img src="/img/map2.gif" alt=""></p>
+<blockquote>
+<p>map和multimap内部的数据结构也是平衡二叉树。map 和 multimap 拥有 set 和 multiset 所有能为和所有操作函数。</p>
+</blockquote>
+<p><img src="/img/map1.gif" alt=""></p>
+<blockquote>
+<p>map和multimap根据元素的key自动对元素进行排序，要修改元素的key必须先删除拥有该key的元素，然后插入拥有新的key/value的元素。</p>
+</blockquote>
+<h2 id="1-常用函数">1.常用函数</h2>
+<p>注意：所有的搜索函数，参数是key，而不是value。这样你就不能以 find() 搜寻拥有某特定 value 的元素。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//返回键值等于 key 的元素个数</span></div><div class="line">m.count(key)</div><div class="line"></div><div class="line"><span class="comment">//返回键值等于 key 的第一个元素，找不到就返回 end()</span></div><div class="line">m.find(key)</div><div class="line"></div><div class="line"><span class="comment">//返回 键值 &gt;= key 的第一个元素位置</span></div><div class="line">m.lower_bound(key)</div><div class="line"></div><div class="line"><span class="comment">//返回 键值 &gt;= key 的第一个元素位置</span></div><div class="line">m.upper_bound(key)</div><div class="line"></div><div class="line"><span class="comment">//返回 键值 == key 的元素区间</span></div><div class="line">m.equal_range(key)</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//插入</span></div><div class="line">c.insert(elem) </div><div class="line">c.insert(pos,elem)</div><div class="line">c.insert(beg,end)</div><div class="line"></div><div class="line"><span class="comment">//删除</span></div><div class="line">c.erase(elem)</div><div class="line">c.erase(pos)</div><div class="line">c.erase(beg,end)</div><div class="line"></div><div class="line"><span class="comment">//使迭代器失效，注意！！！！</span></div><div class="line"><span class="keyword">typedef</span> std::<span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>,<span class="keyword">float</span>&gt;</span> StringFloatMap;</div><div class="line">StringFloatMap coll;</div><div class="line">StringFloatMap::iterator pos;</div><div class="line"><span class="keyword">for</span> (pos = coll.begin(); pos != coll.end(); ++pos) </div><div class="line">{</div><div class="line">   <span class="keyword">if</span> (pos-&gt;second == value) {</div><div class="line">            coll. erase (pos);    <span class="comment">// 出错 !!!</span></div><div class="line">   }</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//正确处理迭代器所指元素的方法</span></div><div class="line"><span class="keyword">typedef</span> std::<span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>,<span class="keyword">float</span>&gt;</span> StringFloatMap;</div><div class="line">StringFloatMap coll;</div><div class="line">StringFloatMap::iterator pos;</div><div class="line"><span class="comment">//remove all elements having a certain value</span></div><div class="line"><span class="keyword">for</span> (pos = coll.begin(); pos != coll.end(); ) </div><div class="line">{</div><div class="line">       <span class="keyword">if</span> (pos-&gt;second == value) {</div><div class="line">           c.erase(pos++);        <span class="comment">// Make clear!!</span></div><div class="line">       }</div><div class="line">       <span class="keyword">else</span> {</div><div class="line">           ++pos;</div><div class="line">       }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="将value值传入map">将value值传入map</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//直接赋值</span></div><div class="line">coll[<span class="string">"otto"</span>] = <span class="number">7.7</span>;</div><div class="line"><span class="comment">//用make_pair()</span></div><div class="line">coll.insert(std::make_pair(<span class="string">"otto"</span>,<span class="number">22.3</span>));</div></pre></td></tr></table></figure>
+
+<p>引用<a href="http://blog.csdn.net/lwbeyond/article/details/7313204#" target="_blank" rel="external">http://blog.csdn.net/lwbeyond/article/details/7313204#</a></p>
+
       
     </div>
     <footer>
       
         
         
+  
+  <div class="tags">
+    <a href="/tags/STL/">STL</a>
+  </div>
+
 <!-- Baidu Button BEGIN -->
 <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
 <a class="bds_qzone"></a>
@@ -260,10 +288,10 @@ document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static
 
  <nav id="pagination" >
     
-    <a href="/2015/03/25/map-multimap/" class="alignleft prev" >上一页</a>
+    <a href="/2015/03/25/map-unordered-map/" class="alignleft prev" >上一页</a>
     
     
-    <a href="/2015/03/23/网络常用协议/" class="alignright next" >下一页</a>
+    <a href="/2015/03/23/python进程与线程/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>

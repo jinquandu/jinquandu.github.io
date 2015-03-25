@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>python进程与线程 | Du&#39;s blog</title>
+  <title>vector | Du&#39;s blog</title>
   <meta name="author" content="dujinquan">
   
   <meta name="description" content="Du&#39;s blog">
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="python进程与线程"/>
+  <meta property="og:title" content="vector"/>
   <meta property="og:site_name" content="Du&#39;s blog"/>
 
   
@@ -218,23 +218,47 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-03-23T15:15:08.000Z"><a href="/2015/03/23/python进程与线程/">3月 23 2015</a></time>
+        <time datetime="2015-03-25T13:13:27.000Z"><a href="/2015/03/25/vector/">3月 25 2015</a></time>
       
       
   
-    <h1 class="title">python进程与线程</h1>
+    <h1 class="title">vector</h1>
   
 
     </header>
     <div class="entry">
       
-        
+        <blockquote>
+<p>vector是C++标准模板库中的部分内容，中文偶尔译作“容器”，但并不准确。它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说，vector是一个能够存放任意类型的动态数组，能够增加和压缩数据。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//简单的使用方法</span></div><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> test;<span class="comment">//建立一个vector</span></div><div class="line">test.pushback(<span class="number">1</span>);<span class="comment">//把1vector,这样test[0]就是1</span></div><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span>::iterator iter=test.begin();<span class="comment">//定义一个可以迭代int型vector的迭代器iter，它指向test的首位</span></div><div class="line"><span class="keyword">while</span>(iter!=test.end()) {<span class="built_in">cout</span>&lt;&lt;*iter;iter++}<span class="comment">//iter++指的是向前迭代一位，直到iter到超出末端迭代器为止，输出迭代器指向的值</span></div><div class="line">c.erase(pos)<span class="comment">//删除pos位置的数据，传回下一个数据的位置。</span></div><div class="line">c.erase(beg,end)<span class="comment">//删除[beg,end)区间的数据，传回下一个数据的位置。</span></div><div class="line">c.insert(pos,elem)<span class="comment">//在pos位置插入一个elem拷贝</span></div><div class="line">c.size()<span class="comment">//返回容器中实际数据的个数。</span></div><div class="line">c1.swap(c2);swap(c1,c2)<span class="comment">//将c1和c2元素互换。同上操作。</span></div></pre></td></tr></table></figure>
+
+<h2 id="内存机制">内存机制</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> arr;</div><div class="line">ofstream wf(<span class="string">"1.txt"</span>);</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;++i)</div><div class="line">{</div><div class="line">	arr.push_back(i);</div><div class="line">	wf&lt;&lt;<span class="string">"capacity="</span>&lt;&lt;arr.capacity()&lt;&lt;<span class="string">",size="</span>&lt;&lt;arr.size()&lt;&lt;end;</div><div class="line">}</div><div class="line">wf.close();</div></pre></td></tr></table></figure>
+
+
+
+<p>capacity()返回的是当前vector对象缓冲区（后面的对vector维护的内存空间皆称为缓冲区）实际申请的空间大小，而size()返回的是当前对象缓冲区中存储数据的个数，capacity永远是大于等于size的，当size和capacity相等时继续添加数据时vector会扩容。<br>基本上是扩容已有空间的50%。<br>从文件中可以观察capacity的变化，我们可以更直观的去扩容的源码。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (max_size() - size() &lt; _Count)_Xlen();	<span class="comment">// result too long，抛出异常_THROW(length_error, "vector&lt;T&gt; too long");</span></div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (_Capacity &lt; size() + _Count){	<span class="comment">// not enough room, reallocate</span></div><div class="line">	_Capacity = max_size() - _Capacity / <span class="number">2</span> &lt; _Capacity? <span class="number">0</span> : _Capacity + _Capacity / <span class="number">2</span>;	<span class="comment">// try to grow by 50%，扩容50%</span></div><div class="line">	<span class="keyword">if</span> (_Capacity &lt; size() + _Count)<span class="comment">//扩容50%后依然不够容下，则使容量等于当前数据个数加上新增数据个数</span></div><div class="line">		_Capacity = size() + _Count;</div><div class="line">	pointer _Newvec = <span class="keyword">this</span>-&gt;_Alval.allocate(_Capacity);<span class="comment">//申请新的空间</span></div><div class="line">	pointer _Ptr = _Newvec;</div><div class="line"></div><div class="line">	<span class="comment">//拷贝原有数据到新的内存中</span></div><div class="line">	...</div><div class="line">	<span class="comment">//拷贝新增数据到新的内存的后面</span></div><div class="line">	...</div><div class="line">	<span class="comment">//释放原来申请的内存</span></div><div class="line">	...</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<p>对的，就是每次扩容50%。至于删除容器中数据的时候，缓冲区大小并不会改变，仅仅只是清楚了其中的数据，只有在析构函数调用的时候vector才会自动释放缓冲区。</p>
+<h2 id="vector-resize()_与_vector-reserve()的区别">vector.resize() 与 vector.reserve()的区别</h2>
+<p>reserve是容器预留空间，但并不真正创建元素对象，在创建对象之前，不能引用容器内的元素，因此当加入新的元素时，需要用push_back()/insert()函数。<br>resize是改变容器的大小，并且创建对象，因此，调用这个函数之后，就可以引用容器内的对象了，因此当加入新的元素时，用operator[]操作符，或者用迭代器来引用元素对象。</p>
+<p>引用<a href="http://blog.csdn.net/mfcing/article/details/8746256" target="_blank" rel="external">http://blog.csdn.net/mfcing/article/details/8746256</a></p>
+
       
     </div>
     <footer>
       
         
         
+  
+  <div class="tags">
+    <a href="/tags/STL/">STL</a>
+  </div>
+
 <!-- Baidu Button BEGIN -->
 <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
 <a class="bds_qzone"></a>
@@ -260,10 +284,8 @@ document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static
 
  <nav id="pagination" >
     
-    <a href="/2015/03/25/map-multimap/" class="alignleft prev" >上一页</a>
     
-    
-    <a href="/2015/03/23/网络常用协议/" class="alignright next" >下一页</a>
+    <a href="/2015/03/25/map-unordered-map/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>

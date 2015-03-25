@@ -219,6 +219,185 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-03-25T13:13:27.000Z"><a href="/2015/03/25/vector/">3月 25 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/25/vector/">vector</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>vector是C++标准模板库中的部分内容，中文偶尔译作“容器”，但并不准确。它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说，vector是一个能够存放任意类型的动态数组，能够增加和压缩数据。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//简单的使用方法</span></div><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> test;<span class="comment">//建立一个vector</span></div><div class="line">test.pushback(<span class="number">1</span>);<span class="comment">//把1vector,这样test[0]就是1</span></div><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span>::iterator iter=test.begin();<span class="comment">//定义一个可以迭代int型vector的迭代器iter，它指向test的首位</span></div><div class="line"><span class="keyword">while</span>(iter!=test.end()) {<span class="built_in">cout</span>&lt;&lt;*iter;iter++}<span class="comment">//iter++指的是向前迭代一位，直到iter到超出末端迭代器为止，输出迭代器指向的值</span></div><div class="line">c.erase(pos)<span class="comment">//删除pos位置的数据，传回下一个数据的位置。</span></div><div class="line">c.erase(beg,end)<span class="comment">//删除[beg,end)区间的数据，传回下一个数据的位置。</span></div><div class="line">c.insert(pos,elem)<span class="comment">//在pos位置插入一个elem拷贝</span></div><div class="line">c.size()<span class="comment">//返回容器中实际数据的个数。</span></div><div class="line">c1.swap(c2);swap(c1,c2)<span class="comment">//将c1和c2元素互换。同上操作。</span></div></pre></td></tr></table></figure>
+
+<h2 id="内存机制">内存机制</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> arr;</div><div class="line">ofstream wf(<span class="string">"1.txt"</span>);</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;++i)</div><div class="line">{</div><div class="line">	arr.push_back(i);</div><div class="line">	wf&lt;&lt;<span class="string">"capacity="</span>&lt;&lt;arr.capacity()&lt;&lt;<span class="string">",size="</span>&lt;&lt;arr.size()&lt;&lt;end;</div><div class="line">}</div><div class="line">wf.close();</div></pre></td></tr></table></figure>
+
+
+
+<p>capacity()返回的是当前vector对象缓冲区（后面的对vector维护的内存空间皆称为缓冲区）实际申请的空间大小，而size()返回的是当前对象缓冲区中存储数据的个数，capacity永远是大于等于size的，当size和capacity相等时继续添加数据时vector会扩容。<br>基本上是扩容已有空间的50%。<br>从文件中可以观察capacity的变化，我们可以更直观的去扩容的源码。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (max_size() - size() &lt; _Count)_Xlen();	<span class="comment">// result too long，抛出异常_THROW(length_error, "vector&lt;T&gt; too long");</span></div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (_Capacity &lt; size() + _Count){	<span class="comment">// not enough room, reallocate</span></div><div class="line">	_Capacity = max_size() - _Capacity / <span class="number">2</span> &lt; _Capacity? <span class="number">0</span> : _Capacity + _Capacity / <span class="number">2</span>;	<span class="comment">// try to grow by 50%，扩容50%</span></div><div class="line">	<span class="keyword">if</span> (_Capacity &lt; size() + _Count)<span class="comment">//扩容50%后依然不够容下，则使容量等于当前数据个数加上新增数据个数</span></div><div class="line">		_Capacity = size() + _Count;</div><div class="line">	pointer _Newvec = <span class="keyword">this</span>-&gt;_Alval.allocate(_Capacity);<span class="comment">//申请新的空间</span></div><div class="line">	pointer _Ptr = _Newvec;</div><div class="line"></div><div class="line">	<span class="comment">//拷贝原有数据到新的内存中</span></div><div class="line">	...</div><div class="line">	<span class="comment">//拷贝新增数据到新的内存的后面</span></div><div class="line">	...</div><div class="line">	<span class="comment">//释放原来申请的内存</span></div><div class="line">	...</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<p>对的，就是每次扩容50%。至于删除容器中数据的时候，缓冲区大小并不会改变，仅仅只是清楚了其中的数据，只有在析构函数调用的时候vector才会自动释放缓冲区。</p>
+<h2 id="vector-resize()_与_vector-reserve()的区别">vector.resize() 与 vector.reserve()的区别</h2>
+<p>reserve是容器预留空间，但并不真正创建元素对象，在创建对象之前，不能引用容器内的元素，因此当加入新的元素时，需要用push_back()/insert()函数。<br>resize是改变容器的大小，并且创建对象，因此，调用这个函数之后，就可以引用容器内的对象了，因此当加入新的元素时，用operator[]操作符，或者用迭代器来引用元素对象。</p>
+<p>引用<a href="http://blog.csdn.net/mfcing/article/details/8746256" target="_blank" rel="external">http://blog.csdn.net/mfcing/article/details/8746256</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-25T13:05:46.000Z"><a href="/2015/03/25/map-unordered-map/">3月 25 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/25/map-unordered-map/">map/unordered_map</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>map是基于红黑树实现的，可以快速查找一个元素是否存在，是关系型容器，能够表达两个数据之间的映射关系。</p>
+<p>unordered_map的插入、删除、查找 性能都优于 hash_map 优于 map，所以首选为 unordered_map.</p>
+<p>它的缺陷是元素是无序的，当使用时候需要元素是有序的时候，不可以用它。</p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-25T12:39:45.000Z"><a href="/2015/03/25/map-multimap/">3月 25 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/25/map-multimap/">map/multimap</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>使用map/multimap之前要加入头文件#include<map>,map和multimap将key/value当作元素，进行管理。它们可根据key的排序准则自动将元素排序。multimap允许重复元素，map不允许重复元素。</map></p>
+</blockquote>
+<p><img src="/img/map2.gif" alt=""></p>
+<blockquote>
+<p>map和multimap内部的数据结构也是平衡二叉树。map 和 multimap 拥有 set 和 multiset 所有能为和所有操作函数。</p>
+</blockquote>
+<p><img src="/img/map1.gif" alt=""></p>
+<blockquote>
+<p>map和multimap根据元素的key自动对元素进行排序，要修改元素的key必须先删除拥有该key的元素，然后插入拥有新的key/value的元素。</p>
+</blockquote>
+<h2 id="1-常用函数">1.常用函数</h2>
+<p>注意：所有的搜索函数，参数是key，而不是value。这样你就不能以 find() 搜寻拥有某特定 value 的元素。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//返回键值等于 key 的元素个数</span></div><div class="line">m.count(key)</div><div class="line"></div><div class="line"><span class="comment">//返回键值等于 key 的第一个元素，找不到就返回 end()</span></div><div class="line">m.find(key)</div><div class="line"></div><div class="line"><span class="comment">//返回 键值 &gt;= key 的第一个元素位置</span></div><div class="line">m.lower_bound(key)</div><div class="line"></div><div class="line"><span class="comment">//返回 键值 &gt;= key 的第一个元素位置</span></div><div class="line">m.upper_bound(key)</div><div class="line"></div><div class="line"><span class="comment">//返回 键值 == key 的元素区间</span></div><div class="line">m.equal_range(key)</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//插入</span></div><div class="line">c.insert(elem) </div><div class="line">c.insert(pos,elem)</div><div class="line">c.insert(beg,end)</div><div class="line"></div><div class="line"><span class="comment">//删除</span></div><div class="line">c.erase(elem)</div><div class="line">c.erase(pos)</div><div class="line">c.erase(beg,end)</div><div class="line"></div><div class="line"><span class="comment">//使迭代器失效，注意！！！！</span></div><div class="line"><span class="keyword">typedef</span> std::<span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>,<span class="keyword">float</span>&gt;</span> StringFloatMap;</div><div class="line">StringFloatMap coll;</div><div class="line">StringFloatMap::iterator pos;</div><div class="line"><span class="keyword">for</span> (pos = coll.begin(); pos != coll.end(); ++pos) </div><div class="line">{</div><div class="line">   <span class="keyword">if</span> (pos-&gt;second == value) {</div><div class="line">            coll. erase (pos);    <span class="comment">// 出错 !!!</span></div><div class="line">   }</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//正确处理迭代器所指元素的方法</span></div><div class="line"><span class="keyword">typedef</span> std::<span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>,<span class="keyword">float</span>&gt;</span> StringFloatMap;</div><div class="line">StringFloatMap coll;</div><div class="line">StringFloatMap::iterator pos;</div><div class="line"><span class="comment">//remove all elements having a certain value</span></div><div class="line"><span class="keyword">for</span> (pos = coll.begin(); pos != coll.end(); ) </div><div class="line">{</div><div class="line">       <span class="keyword">if</span> (pos-&gt;second == value) {</div><div class="line">           c.erase(pos++);        <span class="comment">// Make clear!!</span></div><div class="line">       }</div><div class="line">       <span class="keyword">else</span> {</div><div class="line">           ++pos;</div><div class="line">       }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="将value值传入map">将value值传入map</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//直接赋值</span></div><div class="line">coll[<span class="string">"otto"</span>] = <span class="number">7.7</span>;</div><div class="line"><span class="comment">//用make_pair()</span></div><div class="line">coll.insert(std::make_pair(<span class="string">"otto"</span>,<span class="number">22.3</span>));</div></pre></td></tr></table></figure>
+
+<p>引用<a href="http://blog.csdn.net/lwbeyond/article/details/7313204#" target="_blank" rel="external">http://blog.csdn.net/lwbeyond/article/details/7313204#</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-03-23T15:15:08.000Z"><a href="/2015/03/23/python进程与线程/">3月 23 2015</a></time>
       
       
@@ -369,155 +548,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-23T15:13:42.000Z"><a href="/2015/03/23/linux-file-org/">3月 23 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/23/linux-file-org/">linux-file-org</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>目录结构</p>
-<p>目录    描述<br>/    第一层次结构 的根、 整个文件系统层次结构的根目录。<br>/bin/    需要在单用户模式可用的必要命令（可执行文件）；面向所有用户，例如： cat、 ls、 cp。<br>/boot/    引导程序文件，例如： kernel、initrd；时常是一个单独的分区[6]<br>/dev/    必要设备, 例如：, /dev/null.<br>/etc/    特定主机，系统范围内的配置文件。<br>关于这个名称目前有争议。在贝尔实验室关于UNIX实现文档的早期版本中，/etc 被称为etcetera， [7] 这是由于过去此目录中存放所有不属于别处的所有东西（然而，FHS限制/etc存放静态配置文件，不能包含二进制文件）。 [8] 自从早期文档出版以来，目录名称已被以各种方式重新称呼。最近的解释包括反向缩略语如：”可编辑的文本配置”（英文 “Editable Text Configuration”）或”扩展工具箱”（英文 “Extended Tool Chest”)。 [9]</p>
-<p>/etc/opt/<br>/opt/的配置文件<br>/etc/X11/<br>X Window系统(版本11)的配置文件<br>/etc/sgml/<br>SGML的配置文件<br>/etc/xml/<br>XML的配置文件<br>/home/    用户的家目录，包含保存的文件、个人设置等，一般为单独的分区。<br>/lib/    /bin/ 和 /sbin/中二进制文件必要的库文件。<br>/media/    可移除媒体(如CD-ROM)的挂载点<br>/mnt/    临时挂载的文件系统。<br>/opt/    可选应用软件 包<br>/proc/    虚拟文件系统，将内核与进程状态归档为文本文件。例如：uptime、 network。在Linux中，对应Procfs格式挂载。<br>/root/    超级用户的家目录<br>/sbin/    必要的系统二进制文件，例如： init、 ip、 mount。<br>/srv/    站点的具体数据，由系统提供。<br>/tmp/    临时文件(参见 /var/tmp)，在系统重启时目录中文件不会被保留。<br>/usr/    用于存储只读用户数据的第二层次； 包含绝大多数的(多)用户工具和应用程序。[11]<br>/usr/bin/<br>非必要可执行文件 (在单用户模式中不需要)；面向所有用户。<br>/usr/include/<br>标准包含文件。<br>/usr/lib/<br>/usr/bin/和/usr/sbin/中二进制文件的库。<br>/usr/sbin/<br>非必要的系统二进制文件，例如：大量网络服务的守护进程。<br>/usr/share/<br>体系结构无关（共享）数据。<br>/usr/src/<br>源代码,例如:内核源代码及其头文件。<br>/usr/X11R6/<br>X Window系统 版本 11, Release 6.<br>/usr/local/<br>本地数据的第三层次， 具体到本台主机。通常而言有进一步的子目录， 例如：bin/、lib/、share/.</p>
-<p>/var/    变量文件——在正常运行的系统中其内容不断变化的文件，如日志，脱机文件和临时电子邮件文件。有时是一个单独的分区。<br>/var/cache/<br>应用程序缓存数据。这些数据是在本地生成的一个耗时的I/O或计算结果。应用程序必须能够再生或恢复数据。缓存的文件可以被删除而不导致数据丢失。<br>/var/lib/<br>状态信息。 由程序在运行时维护的持久性数据。 例如：数据库、包装的系统元数据等。<br>/var/lock/<br>锁文件，一类跟踪当前使用中资源的文件。<br>/var/log/<br>日志文件，包含大量日志文件。<br>/var/mail/<br>用户的电子邮箱。<br>/var/run/<br>自最后一次启动以来运行中的系统的信息，例如：当前登录的用户和运行中的守护进程。现已经被/run代替[13]。<br>/var/spool/<br>等待处理的任务的脱机文件，例如：打印队列和未读的邮件。<br>/var/spool/mail/<br>用户的邮箱(不鼓励的存储位置)<br>/var/tmp/<br>在系统重启过程中可以保留的临时文件。<br>/run<br>代替/var/run目录。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-23T14:51:05.000Z"><a href="/2015/03/23/lvmeng-interview/">3月 23 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/23/lvmeng-interview/">绿盟面试总结</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="笔试">笔试</h2>
-<p>面的是后台开发，题主要是C/C++，还有一些网络的常用协议。C/C++主要包含内存管理和指针问题。题目偏简单，做起来挺亲切的。</p>
-<h2 id="面试">面试</h2>
-<p>感觉面试官根本不想和我交流，就东问一下，西问一下。还是那些实际的问题。主要包括，</p>
-<ul>
-<li>linux下文件结构</li>
-<li>python进程和线程的应用情景</li>
-</ul>
-<blockquote>
-<p>怎么才能让面试官问我算法题呢？ T T</p>
-</blockquote>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-20T15:47:55.000Z"><a href="/2015/03/20/Decorator-designpattern/">3月 20 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/20/Decorator-designpattern/">Decorator designpattern</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//人</span></div><div class="line"><span class="keyword">class</span> Person</div><div class="line">{</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="built_in">string</span> m_strName;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Person(<span class="built_in">string</span> strName)</div><div class="line">	{</div><div class="line">		m_strName=strName;</div><div class="line">	}</div><div class="line">	Person(){}</div><div class="line">	<span class="keyword">virtual</span> <span class="keyword">void</span> Show()</div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"装扮的是:"</span>&lt;&lt;m_strName&lt;&lt;endl;</div><div class="line">	}</div><div class="line"></div><div class="line">};</div><div class="line"><span class="comment">//装饰类</span></div><div class="line"><span class="keyword">class</span> Finery :<span class="keyword">public</span> Person</div><div class="line">{</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	Person* m_component;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">void</span> Decorate(Person* component)</div><div class="line">	{</div><div class="line">		m_component=component;</div><div class="line">	}</div><div class="line">	<span class="keyword">virtual</span> <span class="keyword">void</span> Show()</div><div class="line">	{</div><div class="line">		m_component-&gt;Show();</div><div class="line">	}</div><div class="line">};</div><div class="line"><span class="comment">//T恤</span></div><div class="line"><span class="keyword">class</span> TShirts: <span class="keyword">public</span> Finery</div><div class="line">{</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">virtual</span> <span class="keyword">void</span> Show()</div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"T Shirts"</span>&lt;&lt;endl;</div><div class="line">		m_component-&gt;Show();</div><div class="line">	}</div><div class="line">};</div><div class="line"><span class="comment">//裤子</span></div><div class="line"><span class="keyword">class</span> BigTrouser :<span class="keyword">public</span>  Finery</div><div class="line">{</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">virtual</span> <span class="keyword">void</span> Show()</div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">" Big Trouser"</span>&lt;&lt;endl;</div><div class="line">		m_component-&gt;Show();</div><div class="line">	}</div><div class="line">};</div><div class="line"></div><div class="line"><span class="comment">//客户端</span></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	Person *p=<span class="keyword">new</span> Person(<span class="string">"小李"</span>);</div><div class="line">	BigTrouser *bt=<span class="keyword">new</span> BigTrouser();</div><div class="line">	TShirts *ts=<span class="keyword">new</span> TShirts();</div><div class="line"></div><div class="line">	bt-&gt;Decorate(p);</div><div class="line">	ts-&gt;Decorate(bt);</div><div class="line">	ts-&gt;Show();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -545,8 +575,6 @@
 </div>
 
 
-
-  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1586279270&verifier=0c2cdcf8&dpc=1"></iframe>
 </aside>
     <div class="clearfix"></div>
   </div>
@@ -605,4 +633,3 @@ Theme of <a href="https://github.com/zippera/lightum">Lightum</a>, Improved from
 </html>
 
 
-<a href="https://github.com/zippera" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png" alt="Fork me on GitHub"></a>
