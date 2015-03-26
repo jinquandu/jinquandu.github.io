@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>PageRank | Du&#39;s blog</title>
+  <meta name="author" content="dujinquan">
+  
+  <meta name="description" content="Du&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="PageRank"/>
+  <meta property="og:site_name" content="Du&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="http://zipperary.com/atom.xml" title="Du&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Du&#39;s blog</a></h1>
+  <h2><a href="/">Walk step by step</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-26T11:11:48.000Z"><a href="/2015/03/26/PageRank/">3月 26 2015</a></time>
+      
+      
+  
+    <h1 class="title">PageRank</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>本文首先会讨论搜索引擎的核心难题，同时讨论早期搜索引擎关于结果页面重要性评价算法的困境，借此引出PageRank产生的背景。第二部分会详细讨论PageRank的算法，以及处理Dead Ends的方法。</p>
+</blockquote>
+<h1 id="搜索引擎的难题">搜索引擎的难题</h1>
+<p>Google早已成为全球最成功的互联网搜索引擎，但这个当前的搜索引擎巨无霸却不是最早的互联网搜索引擎，在Google出现之前，曾出现过许多通用或专业领域搜索引擎。Google最终能击败所有竞争对手，很大程度上是因为它解决了困扰前辈们的最大难题：对搜索结果按重要性排序。而解决这个问题的算法就是PageRank。毫不夸张的说，是PageRank算法成就了Google今天的低位。要理解为什么解决这个难题如此重要，我们先来看一下搜索引擎的核心框架。</p>
+<h2 id="早期搜索引擎的做法">早期搜索引擎的做法</h2>
+<h3 id="不评价">不评价</h3>
+<p>这个看起来可能有点搞笑，但实际上早期很多搜索引擎（甚至包括现在的很多专业领域搜索引擎）根本不评价结果重要性，而是直接按照某自然顺序（例如时间顺序或编号顺序）返回结果。这在结果集比较少的情况下还说得过去，但是一旦结果集变大，用户叫苦不迭，试想让你从几万条质量参差不齐的页面中寻找需要的内容，简直就是一场灾难，这也注定这种方法不可能用于现代的通用搜索引擎。</p>
+<h3 id="基于检索词的评价">基于检索词的评价</h3>
+<p>基于检索词评价的思想非常朴素：和检索词匹配度越高的页面重要性越高。“匹配度”就是要定义的具体度量。一个最直接的想法是关键词出现次数越多的页面匹配度越高。比如搜索“719 博客”的例子：假设A页面出现“719”5次，“博客”10次；B页面出现“719”2次，“博客”8次。于是A页面的匹配度为5 + 10 = 15，B页面为2 + 8 = 10，于是认为A页面的重要性高于B页面。很多朋友可能意识到这里的不合理性：内容较长的网页往往更可能比内容较短的网页关键词出现的次数多。因此，我们可以修改一下算法，用关键词出现次数除以页面总词数，也就是通过关键词占比作为匹配度，这样可以克服上面提到的不合理。</p>
+<p>早期一些搜索引擎确实是基于类似的算法评价网页重要性的。这种评价算法看似依据充分、实现直观简单，但却非常容易受到一种叫“Term Spam”的攻击。</p>
+<h4 id="Term_Spam">Term Spam</h4>
+<p>现在假设Google单纯使用关键词占比评价页面重要性，而我想让我的博客在搜索结果中排名更靠前（最好排第一）。那么我可以这么做：在页面中加入一个隐藏的html元素（例如一个div），然后其内容是“719”重复一万次。这样，搜索引擎在计算“张洋 博客”的搜索结果时，我的博客关键词占比就会非常大，从而做到排名靠前的效果。更进一步，我甚至可以干扰别的关键词搜索结果，例如我知道现在欧洲杯很火热，我就在我博客的隐藏div里加一万个“欧洲杯”，当有用户搜索欧洲杯时，我的博客就能出现在搜索结果较靠前的位置。这种行为就叫做“Term Spam”。</p>
+<p>早期搜索引擎深受这种作弊方法的困扰，加之基于关键词的评价算法本身也不甚合理，因此经常是搜出一堆质量低下的结果，用户体验大大打了折扣。而Google正是在这种背景下，提出了PageRank算法，并申请了专利保护。此举充分保护了当时相对弱小Google，也使得Google一举成为全球首屈一指的搜索引擎。</p>
+<h1 id="PageRank算法">PageRank算法</h1>
+<p>PageRank算法的核心思想有2点：</p>
+<p>1）一页面有越多的入链，那么这个页面就越重要。入链就是指别的网页中指向该页面的链接，比如A页面中，有一个链接指向B页面，那个A页面中的指向B页面的那个链接就是B页面的一个入链。这个思想背后的含义可以理解为，有很多页面引用我，说明我的质量好，大家都愿意从别的地方来我这。就好像有一个人写了一篇文章，然后别人觉得写得很好，就会在别的地方引用它，是一个道理。</p>
+<p>2）指向一个页面的链接所在的页面质量越高，这个链接的权重就越大。举个例子，比如有一个页面www.xxx.com，这个页面在我的这篇博客网页中被引用，和在百度首页被引用，是有很大差别的，因为我这篇博客的页面，相对于百度首页的页面，质量都不在一个档次，因此要区别对待，给予不同的权重。</p>
+<p>现在假设世界上只有四张网页：A、B、C、D，其抽象结构如下图：</p>
+<p><img src="/img/pagerank1.png" alt=""></p>
+<p>显然这个图是强连通的（从任一节点出发都可以到达另外任何一个节点）。</p>
+<p>然后需要用一种合适的数据结构表示页面间的连接关系。其实，PageRank算法是基于这样一种背景思想：被用户访问越多的网页更可能质量越高，而用户在浏览网页时主要通过超链接进行页面跳转，因此我们需要通过分析超链接组成的拓扑结构来推算每个网页被访问频率的高低。最简单的，我们可以假设当一个用户停留在某页面时，跳转到页面上每个被链页面的概率是相同的。例如，上图中A页面链向B、C、D，所以一个用户从A跳转到B、C、D的概率各为1/3。设一共有N个网页，则可以组织这样一个N维矩阵：其中i行j列的值表示用户从页面j转到页面i的概率。这样一个矩阵叫做转移矩阵（Transition Matrix）。下面的转移矩阵M对应上图：</p>
+<p><img src="/img/pagerank2.png" alt=""></p>
+<p>然后，设初始时每个页面的rank值为1/N，这里就是1/4。按A-D顺序将页面rank为向量v：</p>
+<p><img src="/img/pagerank3.png" alt=""></p>
+<p>注意，M第一行分别是A、B、C和D转移到页面A的概率，而v的第一列分别是A、B、C和D当前的rank，因此用M的第一行乘以v的第一列，所得结果就是页面A最新rank的合理估计，同理，Mv的结果就分别代表A、B、C、D新rank：</p>
+<p><img src="/img/pagerank4.png" alt=""></p>
+<p>然后用M再乘以这个新的rank向量，又会产生一个更新的rank向量。迭代这个过程，可以证明v最终会收敛，即v约等于Mv，此时计算停止。最终的v就是各个页面的pagerank值。例如上面的向量经过几步迭代后，大约收敛在（1/4, 1/4, 1/5, 1/4），这就是A、B、C、D最后的pagerank。</p>
+<h1 id="处理Dead_Ends">处理Dead Ends</h1>
+<p>上面的PageRank计算方法假设Web是强连通的，但实际上，Web并不是强连通（甚至不是联通的）。下面看看PageRank算法如何处理一种叫做Dead Ends的情况。</p>
+<p>所谓Dead Ends，就是这样一类节点：它们不存在外链。看下面的图：</p>
+<p><img src="/img/pagerank5.png" alt=""></p>
+<p>注意这里D页面不存在外链，是一个Dead End。上面的算法之所以能成功收敛到非零值，很大程度依赖转移矩阵这样一个性质：每列的加和为1。而在这个图中，M第四列将全为0。在没有Dead Ends的情况下，每次迭代后向量v各项的和始终保持为1，而有了Dead Ends，迭代结果将最终归零（要解释为什么会这样，需要一些矩阵论的知识，比较枯燥，此处略）。</p>
+<p>处理Dead Ends的方法如下：迭代拿掉图中的Dead Ends节点及Dead Ends节点相关的边（之所以迭代拿掉是因为当目前的Dead Ends被拿掉后，可能会出现一批新的Dead Ends），直到图中没有Dead Ends。对剩下部分计算rank，然后以拿掉Dead Ends逆向顺序反推Dead Ends的rank。</p>
+<p>以上图为例，首先拿到D和D相关的边，D被拿到后，C就变成了一个新的Dead Ends，于是拿掉C，最终只剩A、B。此时可很容易算出A、B的PageRank均为1/2。然后我们需要反推Dead Ends的rank，最后被拿掉的是C，可以看到C前置节点有A和B，而A和B的出度分别为3和2，因此C的rank为：1/2 <em> 1/3 + 1/2 </em> 1/2 = 5/12；最后，D的rank为：1/2 <em> 1/3 + 5/12 </em> 1 = 7/12。所以最终的PageRank为（1/2, 1/2, 5/12, 7/12）。</p>
+<p>引用<a href="http://blog.codinglabs.org/articles/intro-to-pagerank.html" target="_blank" rel="external">http://blog.codinglabs.org/articles/intro-to-pagerank.html</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/学习/">学习</a>
+  </div>
+
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=3326447" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    
+    <a href="/2015/03/26/RandNet/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zippera"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  <div class="widget tag">
+<h3 class="title">简介</h3>
+<ul class="entry">
+<li>本体：杜金泉</li>
+<li>现状：在读研究生</li>
+</ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><section>
+Theme of <a href="https://github.com/zippera/lightum">Lightum</a>, Improved from <a href="https://github.com/hexojs/hexo-theme-light">Light</a>, by <a href="/">zippera</a> 
+</section>
+<div class="clearfix"></div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+
+

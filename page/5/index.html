@@ -219,6 +219,158 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-03-13T06:57:44.000Z"><a href="/2015/03/13/lsh/">3月 13 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/13/lsh/">局部敏感哈希（LSH）</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Goal">Goal</h1>
+<blockquote>
+<p>Finding Similar Items</p>
+</blockquote>
+<ul>
+<li>在高维空间上找到那些相近的元素。比如，在做微博文本挖掘的时候，会发现很多微博是高度相似的，因为大量的微博都是转发其他人的微博，并且没有添加评论，导致很多数据是重复或者高度相似的。这给我们进行数据处理带来很大的困扰，我们得想办法把找出这些相似的微博，再对其进行去重处理。<br><img src="/img/lsh1.png" alt="Finding Similar Documents"></li>
+</ul>
+<h1 id="Steps">Steps</h1>
+<p><img src="/img/lsh2.png" alt="Essebtial Steps For Similar Docs"></p>
+<h2 id="Shingling">Shingling</h2>
+<h2 id="Min-Hashing">Min-Hashing</h2>
+<blockquote>
+<p>Convert large sets to short signatures, while preserving similarity.<br><img src="/img/lsh4.png" alt=""><br><img src="/img/lsh5.png" alt=""></p>
+</blockquote>
+<h2 id="LSH">LSH</h2>
+<blockquote>
+<p>General idea: Use a function f(x,y) that tells whether x and y is a candidate pair: a pair of elements whose similarity must be evaluated</p>
+</blockquote>
+<p>我们对签名矩阵按行进行分组，将矩阵分成b组，每组由r行组成.</p>
+<p><img src="/img/lsh6.png" alt=""></p>
+<p>分组之后，我们对最小签名向量的每一组进行hash，各个组设置不同的桶空间。只要两列有一组的最小签名部分相同，那么这两列就会hash到同一个桶而成为候选相似项。签名的分析我们知道，对于某个具体的行，两个签名相同的概率p =两列的相似度= sim(S1,S2)，然后：</p>
+<ol>
+<li><p>在某个组中所有行的两个签名值都相等概率是p^r;</p>
+</li>
+<li><p>在某个组中至少有一对签名不相等的概率是1−p^r;</p>
+</li>
+<li><p>在每一组中至少有一对签名不相等的概率是(1−p^r)^b;</p>
+</li>
+<li><p>至少有一个组的所有对的签名相等的概率是1−(1−p^r)^b;</p>
+</li>
+</ol>
+<p>于是两列成为候选相似对的概率是1−(1−p^r)^b，它采样值以及曲线如下：<br><img src="/img/lsh7.png" alt="r=5,b=20"></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-13T06:57:44.000Z"><a href="/2015/03/13/lsh/">3月 13 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/13/lsh/">局部敏感哈希（LSH）</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Goal">Goal</h1>
+<blockquote>
+<p>Finding Similar Items</p>
+</blockquote>
+<ul>
+<li>在高维空间上找到那些相近的元素。比如，在做微博文本挖掘的时候，会发现很多微博是高度相似的，因为大量的微博都是转发其他人的微博，并且没有添加评论，导致很多数据是重复或者高度相似的。这给我们进行数据处理带来很大的困扰，我们得想办法把找出这些相似的微博，再对其进行去重处理。<br><img src="/img/lsh1.png" alt="Finding Similar Documents"></li>
+</ul>
+<h1 id="Steps">Steps</h1>
+<p><img src="/img/lsh2.png" alt="Essebtial Steps For Similar Docs"></p>
+<h2 id="Shingling">Shingling</h2>
+<h2 id="Min-Hashing">Min-Hashing</h2>
+<blockquote>
+<p>Convert large sets to short signatures, while preserving similarity.<br><img src="/img/lsh4.png" alt=""><br><img src="/img/lsh5.png" alt=""></p>
+</blockquote>
+<h2 id="LSH">LSH</h2>
+<blockquote>
+<p>General idea: Use a function f(x,y) that tells whether x and y is a candidate pair: a pair of elements whose similarity must be evaluated</p>
+</blockquote>
+<p>我们对签名矩阵按行进行分组，将矩阵分成b组，每组由r行组成.</p>
+<p><img src="/img/lsh6.png" alt=""></p>
+<p>分组之后，我们对最小签名向量的每一组进行hash，各个组设置不同的桶空间。只要两列有一组的最小签名部分相同，那么这两列就会hash到同一个桶而成为候选相似项。签名的分析我们知道，对于某个具体的行，两个签名相同的概率p =两列的相似度= sim(S1,S2)，然后：</p>
+<ol>
+<li><p>在某个组中所有行的两个签名值都相等概率是p^r;</p>
+</li>
+<li><p>在某个组中至少有一对签名不相等的概率是1−p^r;</p>
+</li>
+<li><p>在每一组中至少有一对签名不相等的概率是(1−p^r)^b;</p>
+</li>
+<li><p>至少有一个组的所有对的签名相等的概率是1−(1−p^r)^b;</p>
+</li>
+</ol>
+<p>于是两列成为候选相似对的概率是1−(1−p^r)^b，它采样值以及曲线如下：<br><img src="/img/lsh7.png" alt="r=5,b=20"></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-03-11T15:49:52.000Z"><a href="/2015/03/11/Factory-DesignPattern-3/">3月 11 2015</a></time>
       
       
@@ -282,168 +434,6 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#include &lt;iostream&gt;</span></div><div class="line">using namespace std;</div><div class="line">enum SOAPTYPE {SFJ,XSL,NAS};</div><div class="line"></div><div class="line">class soapBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	virtual ~<span class="function"><span class="title">soapBase</span></span>(){};</div><div class="line">	virtual void show() = <span class="number">0</span>;</div><div class="line">};</div><div class="line"></div><div class="line">class SFJSoap:public soapBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	void <span class="function"><span class="title">show</span></span>() {cout&lt;&lt;<span class="string">"SFJ Soap!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line">class XSLSoap:public soapBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	void <span class="function"><span class="title">show</span></span>() {cout&lt;&lt;<span class="string">"XSL Soap!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line">class NASSoap:public soapBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	void <span class="function"><span class="title">show</span></span>() {cout&lt;&lt;<span class="string">"NAS Soap!"</span>&lt;&lt;endl;}</div><div class="line">};</div><div class="line"></div><div class="line">class FactoryBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	virtual soapBase * creatSoap() = <span class="number">0</span>;</div><div class="line">};</div><div class="line"></div><div class="line">class SFJFactory:public FactoryBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	soapBase * <span class="function"><span class="title">creatSoap</span></span>()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> new SFJSoap();</div><div class="line">	}</div><div class="line">};</div><div class="line"></div><div class="line">class XSLFactory:public FactoryBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	soapBase * <span class="function"><span class="title">creatSoap</span></span>()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> new XSLSoap();</div><div class="line">	}</div><div class="line">};</div><div class="line"></div><div class="line">class NASFactory:public FactoryBase</div><div class="line">{</div><div class="line">	public:</div><div class="line">	soapBase * <span class="function"><span class="title">creatSoap</span></span>()</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> new NASSoap();</div><div class="line">	}</div><div class="line">};</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">int <span class="function"><span class="title">main</span></span>()</div><div class="line">{</div><div class="line">	SFJFactory factory1;</div><div class="line">	soapBase* pSoap1 = factory1.creatSoap();</div><div class="line">	pSoap1-&gt;show();</div><div class="line">	XSLFactory factory2;</div><div class="line">	soapBase* pSoap2 = factory2.creatSoap();</div><div class="line">	pSoap2-&gt;show();</div><div class="line">	NASFactory factory3;</div><div class="line">	soapBase* pSoap3 = factory3.creatSoap();</div><div class="line">	pSoap3-&gt;show();</div><div class="line">	delete pSoap1;</div><div class="line">	delete pSoap2;</div><div class="line">	delete pSoap3;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>运行结果:<br><img src="http://img.blog.csdn.net/20140305110043921" alt=""></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-10T01:37:29.000Z"><a href="/2015/03/10/hash/">3月 10 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/10/hash/">hash</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="哈希表">哈希表</h1>
-<p>散列表（Hash table，也叫哈希表），是根据关键字（Key value）而直接访问在内存存储位置的数据结构。也就是说，它通过把键值通过一个函数的计算，映射到表中一个位置来访问记录，这加快了查找速度。这个映射函数称做散列函数，存放记录的数组称做散列表。</p>
-<p>一个通俗的例子是，为了查找电话簿中某人的号码，可以创建一个按照人名首字母顺序排列的表（即建立人名x到首字母F(x)的一个函数关系），在首字母为W的表中查找“王”姓的电话号码，显然比直接查找就要快得多。这里使用人名作为关键字，“取首字母”是这个例子中散列函数的函数法则F()，存放首字母的表对应散列表。关键字和函数法则理论上可以任意确定。</p>
-<h2 id="基本概念">基本概念</h2>
-<ul>
-<li>若关键字为k，则其值存放在f(k)的存储位置上。由此，不需比较便可直接取得所查记录。称这个对应关系f为散列函数，按这个思想建立的表为散列表。</li>
-<li>对不同的关键字可能得到同一散列地址，即k_1 != k_2，而f(k_1)=f(k_2)，这种现象称为碰撞（英语：Collision）。具有相同函数值的关键字对该散列函数来说称做同义词。综上所述，根据散列函数f(k)和处理碰撞的方法将一组关键字映射到一个有限的连续的地址集（区间）上，并以关键字在地址集中的“像”作为记录在表中的存储位置，这种表便称为散列表，这一映射过程称为散列造表或散列，所得的存储位置称散列地址。</li>
-<li>若对于关键字集合中的任一个关键字，经散列函数映象到地址集合中任何一个地址的概率是相等的，则称此类散列函数为均匀散列函数（Uniform Hash function），这就是使关键字经过散列函数得到一个“随机的地址”，从而减少碰撞。<h2 id="构造散列函数">构造散列函数</h2>
-散列函数能使对一个数据序列的访问过程更加迅速有效，通过散列函数，数据元素将被更快定位。</li>
-</ul>
-<ol>
-<li>直接定址法：取关键字或关键字的某个线性函数值为散列地址。即hash(k)=k或hash(k)=a*k + b，其中a\,b为常数（这种散列函数叫做自身函数）</li>
-<li>数字分析法：假设关键字是以r为基的数，并且哈希表中可能出现的关键字都是事先知道的，则可取关键字的若干数位组成哈希地址。</li>
-<li>平方取中法：取关键字平方后的中间几位为哈希地址。通常在选定哈希函数时不一定能知道关键字的全部情况，取其中的哪几位也不一定合适，而一个数平方后的中间几位数和数的每一位都相关，由此使随机分布的关键字得到的哈希地址也是随机的。取的位数由表长决定。</li>
-<li>折叠法：将关键字分割成位数相同的几部分（最后一部分的位数可以不同），然后取这几部分的叠加和（舍去进位）作为哈希地址。</li>
-<li>随机数法</li>
-<li>除留余数法：取关键字被某个不大于散列表表长m的数p除后所得的余数为散列地址。即hash(k)=k mod p, p &lt;= m。不仅可以对关键字直接取模，也可在折叠法、平方取中法等运算之后取模。对p的选择很重要，一般取素数或m，若p选择不好，容易产生碰撞。</li>
-</ol>
-<h2 id="处理碰撞">处理碰撞</h2>
-<p>为了知道碰撞产生的相同散列函数地址所对应的关键字，必须选用另外的散列函数，或者对碰撞结果进行处理。而不发生碰撞的可能性是非常之小的，所以通常对碰撞进行处理。常用方法有以下几种：</p>
-<ul>
-<li>开放地址法</li>
-<li>单独链表法</li>
-<li>双散列</li>
-<li>再散列</li>
-</ul>
-<h2 id="查找效率">查找效率</h2>
-<p>散列表的查找过程基本上和造表过程相同。一些关键码可通过散列函数转换的地址直接找到，另一些关键码在散列函数得到的地址上产生了冲突，需要按处理冲突的方法进行查找。在介绍的三种处理冲突的方法中，产生冲突后的查找仍然是给定值与关键码进行比较的过程。所以，对散列表查找效率的量度，依然用平均查找长度来衡量。</p>
-<p>查找过程中，关键码的比较次数，取决于产生冲突的多少，产生的冲突少，查找效率就高，产生的冲突多，查找效率就低。因此，影响产生冲突多少的因素，也就是影响查找效率的因素。影响产生冲突多少有以下三个因素：</p>
-<ol>
-<li>散列函数是否均匀；</li>
-<li>处理冲突的方法；</li>
-<li>散列表的载荷因子（英语：load factor）。<h3 id="载荷因子">载荷因子</h3>
-散列表的载荷因子定义为：a = 填入表中的元素个数 / 散列表的长度</li>
-</ol>
-<p>a是散列表装满程度的标志因子。由于表长是定值，a与“填入表中的元素个数”成正比，所以，a越大，表明填入表中的元素越多，产生冲突的可能性就越大；反之，a越小，标明填入表中的元素越少，产生冲突的可能性就越小。实际上，散列表的平均查找长度是载荷因子a的函数，只是不同处理冲突的方法有不同的函数。</p>
-<p>对于开放定址法，荷载因子是特别重要因素，应严格限制在0.7-0.8以下。超过0.8，查表时的CPU缓存不命中（cache missing）按照指数曲线上升。因此，一些采用开放定址法的hash库，如Java的系统库限制了荷载因子为0.75，超过此值将resize散列表。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-10T01:37:29.000Z"><a href="/2015/03/10/hash/">3月 10 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/10/hash/">hash</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="哈希表">哈希表</h1>
-<p>散列表（Hash table，也叫哈希表），是根据关键字（Key value）而直接访问在内存存储位置的数据结构。也就是说，它通过把键值通过一个函数的计算，映射到表中一个位置来访问记录，这加快了查找速度。这个映射函数称做散列函数，存放记录的数组称做散列表。</p>
-<p>一个通俗的例子是，为了查找电话簿中某人的号码，可以创建一个按照人名首字母顺序排列的表（即建立人名x到首字母F(x)的一个函数关系），在首字母为W的表中查找“王”姓的电话号码，显然比直接查找就要快得多。这里使用人名作为关键字，“取首字母”是这个例子中散列函数的函数法则F()，存放首字母的表对应散列表。关键字和函数法则理论上可以任意确定。</p>
-<h2 id="基本概念">基本概念</h2>
-<ul>
-<li>若关键字为k，则其值存放在f(k)的存储位置上。由此，不需比较便可直接取得所查记录。称这个对应关系f为散列函数，按这个思想建立的表为散列表。</li>
-<li>对不同的关键字可能得到同一散列地址，即k_1 != k_2，而f(k_1)=f(k_2)，这种现象称为碰撞（英语：Collision）。具有相同函数值的关键字对该散列函数来说称做同义词。综上所述，根据散列函数f(k)和处理碰撞的方法将一组关键字映射到一个有限的连续的地址集（区间）上，并以关键字在地址集中的“像”作为记录在表中的存储位置，这种表便称为散列表，这一映射过程称为散列造表或散列，所得的存储位置称散列地址。</li>
-<li>若对于关键字集合中的任一个关键字，经散列函数映象到地址集合中任何一个地址的概率是相等的，则称此类散列函数为均匀散列函数（Uniform Hash function），这就是使关键字经过散列函数得到一个“随机的地址”，从而减少碰撞。<h2 id="构造散列函数">构造散列函数</h2>
-散列函数能使对一个数据序列的访问过程更加迅速有效，通过散列函数，数据元素将被更快定位。</li>
-</ul>
-<ol>
-<li>直接定址法：取关键字或关键字的某个线性函数值为散列地址。即hash(k)=k或hash(k)=a*k + b，其中a\,b为常数（这种散列函数叫做自身函数）</li>
-<li>数字分析法：假设关键字是以r为基的数，并且哈希表中可能出现的关键字都是事先知道的，则可取关键字的若干数位组成哈希地址。</li>
-<li>平方取中法：取关键字平方后的中间几位为哈希地址。通常在选定哈希函数时不一定能知道关键字的全部情况，取其中的哪几位也不一定合适，而一个数平方后的中间几位数和数的每一位都相关，由此使随机分布的关键字得到的哈希地址也是随机的。取的位数由表长决定。</li>
-<li>折叠法：将关键字分割成位数相同的几部分（最后一部分的位数可以不同），然后取这几部分的叠加和（舍去进位）作为哈希地址。</li>
-<li>随机数法</li>
-<li>除留余数法：取关键字被某个不大于散列表表长m的数p除后所得的余数为散列地址。即hash(k)=k mod p, p &lt;= m。不仅可以对关键字直接取模，也可在折叠法、平方取中法等运算之后取模。对p的选择很重要，一般取素数或m，若p选择不好，容易产生碰撞。</li>
-</ol>
-<h2 id="处理碰撞">处理碰撞</h2>
-<p>为了知道碰撞产生的相同散列函数地址所对应的关键字，必须选用另外的散列函数，或者对碰撞结果进行处理。而不发生碰撞的可能性是非常之小的，所以通常对碰撞进行处理。常用方法有以下几种：</p>
-<ul>
-<li>开放地址法</li>
-<li>单独链表法</li>
-<li>双散列</li>
-<li>再散列</li>
-</ul>
-<h2 id="查找效率">查找效率</h2>
-<p>散列表的查找过程基本上和造表过程相同。一些关键码可通过散列函数转换的地址直接找到，另一些关键码在散列函数得到的地址上产生了冲突，需要按处理冲突的方法进行查找。在介绍的三种处理冲突的方法中，产生冲突后的查找仍然是给定值与关键码进行比较的过程。所以，对散列表查找效率的量度，依然用平均查找长度来衡量。</p>
-<p>查找过程中，关键码的比较次数，取决于产生冲突的多少，产生的冲突少，查找效率就高，产生的冲突多，查找效率就低。因此，影响产生冲突多少的因素，也就是影响查找效率的因素。影响产生冲突多少有以下三个因素：</p>
-<ol>
-<li>散列函数是否均匀；</li>
-<li>处理冲突的方法；</li>
-<li>散列表的载荷因子（英语：load factor）。<h3 id="载荷因子">载荷因子</h3>
-散列表的载荷因子定义为：a = 填入表中的元素个数 / 散列表的长度</li>
-</ol>
-<p>a是散列表装满程度的标志因子。由于表长是定值，a与“填入表中的元素个数”成正比，所以，a越大，表明填入表中的元素越多，产生冲突的可能性就越大；反之，a越小，标明填入表中的元素越少，产生冲突的可能性就越小。实际上，散列表的平均查找长度是载荷因子a的函数，只是不同处理冲突的方法有不同的函数。</p>
-<p>对于开放定址法，荷载因子是特别重要因素，应严格限制在0.7-0.8以下。超过0.8，查表时的CPU缓存不命中（cache missing）按照指数曲线上升。因此，一些采用开放定址法的hash库，如Java的系统库限制了荷载因子为0.75，超过此值将resize散列表。</p>
 
       
     </div>

@@ -219,6 +219,145 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-03-26T11:11:48.000Z"><a href="/2015/03/26/PageRank/">3月 26 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/26/PageRank/">PageRank</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>本文首先会讨论搜索引擎的核心难题，同时讨论早期搜索引擎关于结果页面重要性评价算法的困境，借此引出PageRank产生的背景。第二部分会详细讨论PageRank的算法，以及处理Dead Ends的方法。</p>
+</blockquote>
+<h1 id="搜索引擎的难题">搜索引擎的难题</h1>
+<p>Google早已成为全球最成功的互联网搜索引擎，但这个当前的搜索引擎巨无霸却不是最早的互联网搜索引擎，在Google出现之前，曾出现过许多通用或专业领域搜索引擎。Google最终能击败所有竞争对手，很大程度上是因为它解决了困扰前辈们的最大难题：对搜索结果按重要性排序。而解决这个问题的算法就是PageRank。毫不夸张的说，是PageRank算法成就了Google今天的低位。要理解为什么解决这个难题如此重要，我们先来看一下搜索引擎的核心框架。</p>
+<h2 id="早期搜索引擎的做法">早期搜索引擎的做法</h2>
+<h3 id="不评价">不评价</h3>
+<p>这个看起来可能有点搞笑，但实际上早期很多搜索引擎（甚至包括现在的很多专业领域搜索引擎）根本不评价结果重要性，而是直接按照某自然顺序（例如时间顺序或编号顺序）返回结果。这在结果集比较少的情况下还说得过去，但是一旦结果集变大，用户叫苦不迭，试想让你从几万条质量参差不齐的页面中寻找需要的内容，简直就是一场灾难，这也注定这种方法不可能用于现代的通用搜索引擎。</p>
+<h3 id="基于检索词的评价">基于检索词的评价</h3>
+<p>基于检索词评价的思想非常朴素：和检索词匹配度越高的页面重要性越高。“匹配度”就是要定义的具体度量。一个最直接的想法是关键词出现次数越多的页面匹配度越高。比如搜索“719 博客”的例子：假设A页面出现“719”5次，“博客”10次；B页面出现“719”2次，“博客”8次。于是A页面的匹配度为5 + 10 = 15，B页面为2 + 8 = 10，于是认为A页面的重要性高于B页面。很多朋友可能意识到这里的不合理性：内容较长的网页往往更可能比内容较短的网页关键词出现的次数多。因此，我们可以修改一下算法，用关键词出现次数除以页面总词数，也就是通过关键词占比作为匹配度，这样可以克服上面提到的不合理。</p>
+<p>早期一些搜索引擎确实是基于类似的算法评价网页重要性的。这种评价算法看似依据充分、实现直观简单，但却非常容易受到一种叫“Term Spam”的攻击。</p>
+<h4 id="Term_Spam">Term Spam</h4>
+<p>现在假设Google单纯使用关键词占比评价页面重要性，而我想让我的博客在搜索结果中排名更靠前（最好排第一）。那么我可以这么做：在页面中加入一个隐藏的html元素（例如一个div），然后其内容是“719”重复一万次。这样，搜索引擎在计算“张洋 博客”的搜索结果时，我的博客关键词占比就会非常大，从而做到排名靠前的效果。更进一步，我甚至可以干扰别的关键词搜索结果，例如我知道现在欧洲杯很火热，我就在我博客的隐藏div里加一万个“欧洲杯”，当有用户搜索欧洲杯时，我的博客就能出现在搜索结果较靠前的位置。这种行为就叫做“Term Spam”。</p>
+<p>早期搜索引擎深受这种作弊方法的困扰，加之基于关键词的评价算法本身也不甚合理，因此经常是搜出一堆质量低下的结果，用户体验大大打了折扣。而Google正是在这种背景下，提出了PageRank算法，并申请了专利保护。此举充分保护了当时相对弱小Google，也使得Google一举成为全球首屈一指的搜索引擎。</p>
+<h1 id="PageRank算法">PageRank算法</h1>
+<p>PageRank算法的核心思想有2点：</p>
+<p>1）一页面有越多的入链，那么这个页面就越重要。入链就是指别的网页中指向该页面的链接，比如A页面中，有一个链接指向B页面，那个A页面中的指向B页面的那个链接就是B页面的一个入链。这个思想背后的含义可以理解为，有很多页面引用我，说明我的质量好，大家都愿意从别的地方来我这。就好像有一个人写了一篇文章，然后别人觉得写得很好，就会在别的地方引用它，是一个道理。</p>
+<p>2）指向一个页面的链接所在的页面质量越高，这个链接的权重就越大。举个例子，比如有一个页面www.xxx.com，这个页面在我的这篇博客网页中被引用，和在百度首页被引用，是有很大差别的，因为我这篇博客的页面，相对于百度首页的页面，质量都不在一个档次，因此要区别对待，给予不同的权重。</p>
+<p>现在假设世界上只有四张网页：A、B、C、D，其抽象结构如下图：</p>
+<p><img src="/img/pagerank1.png" alt=""></p>
+<p>显然这个图是强连通的（从任一节点出发都可以到达另外任何一个节点）。</p>
+<p>然后需要用一种合适的数据结构表示页面间的连接关系。其实，PageRank算法是基于这样一种背景思想：被用户访问越多的网页更可能质量越高，而用户在浏览网页时主要通过超链接进行页面跳转，因此我们需要通过分析超链接组成的拓扑结构来推算每个网页被访问频率的高低。最简单的，我们可以假设当一个用户停留在某页面时，跳转到页面上每个被链页面的概率是相同的。例如，上图中A页面链向B、C、D，所以一个用户从A跳转到B、C、D的概率各为1/3。设一共有N个网页，则可以组织这样一个N维矩阵：其中i行j列的值表示用户从页面j转到页面i的概率。这样一个矩阵叫做转移矩阵（Transition Matrix）。下面的转移矩阵M对应上图：</p>
+<p><img src="/img/pagerank2.png" alt=""></p>
+<p>然后，设初始时每个页面的rank值为1/N，这里就是1/4。按A-D顺序将页面rank为向量v：</p>
+<p><img src="/img/pagerank3.png" alt=""></p>
+<p>注意，M第一行分别是A、B、C和D转移到页面A的概率，而v的第一列分别是A、B、C和D当前的rank，因此用M的第一行乘以v的第一列，所得结果就是页面A最新rank的合理估计，同理，Mv的结果就分别代表A、B、C、D新rank：</p>
+<p><img src="/img/pagerank4.png" alt=""></p>
+<p>然后用M再乘以这个新的rank向量，又会产生一个更新的rank向量。迭代这个过程，可以证明v最终会收敛，即v约等于Mv，此时计算停止。最终的v就是各个页面的pagerank值。例如上面的向量经过几步迭代后，大约收敛在（1/4, 1/4, 1/5, 1/4），这就是A、B、C、D最后的pagerank。</p>
+<h1 id="处理Dead_Ends">处理Dead Ends</h1>
+<p>上面的PageRank计算方法假设Web是强连通的，但实际上，Web并不是强连通（甚至不是联通的）。下面看看PageRank算法如何处理一种叫做Dead Ends的情况。</p>
+<p>所谓Dead Ends，就是这样一类节点：它们不存在外链。看下面的图：</p>
+<p><img src="/img/pagerank5.png" alt=""></p>
+<p>注意这里D页面不存在外链，是一个Dead End。上面的算法之所以能成功收敛到非零值，很大程度依赖转移矩阵这样一个性质：每列的加和为1。而在这个图中，M第四列将全为0。在没有Dead Ends的情况下，每次迭代后向量v各项的和始终保持为1，而有了Dead Ends，迭代结果将最终归零（要解释为什么会这样，需要一些矩阵论的知识，比较枯燥，此处略）。</p>
+<p>处理Dead Ends的方法如下：迭代拿掉图中的Dead Ends节点及Dead Ends节点相关的边（之所以迭代拿掉是因为当目前的Dead Ends被拿掉后，可能会出现一批新的Dead Ends），直到图中没有Dead Ends。对剩下部分计算rank，然后以拿掉Dead Ends逆向顺序反推Dead Ends的rank。</p>
+<p>以上图为例，首先拿到D和D相关的边，D被拿到后，C就变成了一个新的Dead Ends，于是拿掉C，最终只剩A、B。此时可很容易算出A、B的PageRank均为1/2。然后我们需要反推Dead Ends的rank，最后被拿掉的是C，可以看到C前置节点有A和B，而A和B的出度分别为3和2，因此C的rank为：1/2 <em> 1/3 + 1/2 </em> 1/2 = 5/12；最后，D的rank为：1/2 <em> 1/3 + 5/12 </em> 1 = 7/12。所以最终的PageRank为（1/2, 1/2, 5/12, 7/12）。</p>
+<p>引用<a href="http://blog.codinglabs.org/articles/intro-to-pagerank.html" target="_blank" rel="external">http://blog.codinglabs.org/articles/intro-to-pagerank.html</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-26T11:11:35.000Z"><a href="/2015/03/26/RandNet/">3月 26 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/26/RandNet/">RankNet</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="RandNet的基本思想">RandNet的基本思想</h1>
+<p>RankNet是一种Pairwise的Learning to Rank算法。</p>
+<p>RankNet方法就是使用交叉熵作为损失函数，学习出一些模型（例如神经网络、决策树等）来计算每个pair的排序得分，学习模型的过程可以使用梯度下降法。</p>
+<h1 id="方法流程">方法流程</h1>
+<p>首先，我们要明确RankNet方法的目的就是要学习出一个模型，这个模型就是给文档算法的函数f(d)。其中d为文档特征。</p>
+<h2 id="哪一个网页与搜索更相关">哪一个网页与搜索更相关</h2>
+<p>网页u比第网页v与搜索更相关的的概率：</p>
+<p><img src="/img/ranknet1.png" alt=""></p>
+<h2 id="交叉熵作为损失函数。">交叉熵作为损失函数。</h2>
+<p>我们知道，在机器学习中，一般来说，要训练，就要有个Loss Function，来衡量当前模型与Training Set的Loss，也就是差距，然后训练的过程就是把Loss不断减少的过程。</p>
+<p><img src="/img/ranknet2.png" alt=""></p>
+<p><img src="/img/ranknet3.png" alt="f_u - f_v"></p>
+<h2 id="梯度下降法更新迭代求最优的网络模型">梯度下降法更新迭代求最优的网络模型</h2>
+<p>最后我们说一下RankNet算法的一大好处：使用的是交叉熵作为损失函数，它求导方便，适合梯度下降法的框架；而且，即使两个不相关的文档的得分相同时，C也不为零，还是会有惩罚项的。</p>
+<p>引用<a href="http://blog.csdn.net/puqutogether/article/details/42124491" target="_blank" rel="external">http://blog.csdn.net/puqutogether/article/details/42124491</a><br>引用<a href="http://blog.csdn.net/orthocenterchocolate/article/details/43203891" target="_blank" rel="external">http://blog.csdn.net/orthocenterchocolate/article/details/43203891</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-03-25T13:13:27.000Z"><a href="/2015/03/25/vector/">3月 25 2015</a></time>
       
       
@@ -364,174 +503,6 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//直接赋值</span></div><div class="line">coll[<span class="string">"otto"</span>] = <span class="number">7.7</span>;</div><div class="line"><span class="comment">//用make_pair()</span></div><div class="line">coll.insert(std::make_pair(<span class="string">"otto"</span>,<span class="number">22.3</span>));</div></pre></td></tr></table></figure>
 
 <p>引用<a href="http://blog.csdn.net/lwbeyond/article/details/7313204#" target="_blank" rel="external">http://blog.csdn.net/lwbeyond/article/details/7313204#</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-23T15:15:08.000Z"><a href="/2015/03/23/python进程与线程/">3月 23 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/23/python进程与线程/">python进程与线程</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-03-23T15:14:22.000Z"><a href="/2015/03/23/网络常用协议/">3月 23 2015</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/03/23/网络常用协议/">网络常用协议</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <blockquote>
-<p>ARP(Address Resolution Protocol)地址解析协议</p>
-</blockquote>
-<p>它是用于映射计算机的物理地址和临时指定的网络地址。启动时它选择一个协议(网络层)地址，并检查这个地址是否已经有别的计算机使用，如果没有被使用，此结点被使用这个地址，如果此地址已经被别的计算机使用，正在使用此地址的计算机会通告这一信息，只有再选另一个地址了。</p>
-<blockquote>
-<p>SNMP(Simple Network Management P)网络管理协议</p>
-</blockquote>
-<p>它是TCP/IP协议中的一部份，它为本地和远端的网络设备管理提供了一个标准化途径，是分布式环境中的集中化管理的重要组成部份。</p>
-<blockquote>
-<p>BGP4(Border Gateway Protocol Vertion 4)边界网关协议-版本4</p>
-</blockquote>
-<p>它是用于在自治网络中网关主机(每个主机有自己的路由)之间交换路由信息的协议，它使管理员能够在已知的路由策略上配置路由加权，可以更方便地使用无级内部域名路由(CIDR)，它是一种在网络中可以容纳更多地址的机制，它比外部网关协议(EGP)更新。BGP4经常用于网关主机之间，主机中的路由表包括了已知路由的列表，可达的地址和路由加权，这样就可以在路由中选择最好的通路了。BGP在局域网中通信时使用内部BGP(IBGP)，因为IBGP不能很好工作。</p>
-<blockquote>
-<p>DHCP(Dynamic Host Configuration Protocol)动态主机配置协议</p>
-</blockquote>
-<p>它是在TCP/IP网络上使客户机获得配置信息的协议，它是基于BOOTP协议，并在BOOTP协议的基础上添加了自动分配可用网络地址等功能。这两个协议可以通过一些机制互操作。DHCP协议在安装TCP/IP协议和使用TCP/IP协议进行通迅时，必须配置IP地址、子网掩码、缺省网关三个参数，这三个参数可以手动配置，也可以使用DHCP自动配置。</p>
-<blockquote>
-<p>FTP(File Transfer Protocol)文件传输协议</p>
-</blockquote>
-<p>它是一个标准协议，是在计算机和网络之间交换文件的最简单的方法。象传送可显示文件的HTTP和电子邮件的SMTP一样，FTP也是应用TCP/IP协议的应用协议标准。FTP通常用于将网页从创作者上传到服务器上供人使用，而从服务器上下传文件也是一种非常普遍的使用方式。作为用户，您可以用非常简单的DOS界面来使用FTP，也可以使用由第三方提供的图形界面的FTP来更新(删除，重命名，移动和复制)服务器上的文件。现在有许多服务器支持匿名登录，允许用户使用FTP和ANONYMOUS作为用户名进行登录，通常可使用任何口令或只按回车键。</p>
-<blockquote>
-<p>HDLC(High-Level Data Link Control)高层数据链路协议</p>
-</blockquote>
-<p>它是一组用于在网络结点间传送数据的协议。在HDLC中，数据被组成一个个的单元(称为帧)通过网络发送，并由接收方确认收到。HDLC协议也管理数据流和数据发送的间隔时间。HDLC是在数据链路层中最广泛最使用的协议之一。现在作为ISO的标准，HDLC是基于IBM的SDLC协议的，SDLC被广泛用于IBM的大型机环境之中。在HDLC中，属于SDLC的被称为通响应模式(NRM)。在通常响应模式中，基站(通常是大型机)发送数据给本地或远程的二级站。不同类型的HDLC被用于使用X.25协议的网络和帧中继网络，这种协议可以在局域网或广域网中使用，无论此网是公共的还是私人的。</p>
-<blockquote>
-<p>HTTP1.1(Hypertext Transfer Protocol Vertion 1.1)超文本传输协议-版本1.1</p>
-</blockquote>
-<p>它是用来在Internet上传送超文本的传送协议。它是运行在TCP/IP协议族之上的HTTP应用协议，它可以使浏览器更加高效，使网络传输减少。任何服务器除了包括HTML文件以外，还有一个HTTP驻留程序，用于响应用用户请求。您的浏览器是HTTP客户，向服务器发送请求，当浏览器中输入了一个开始文件或点击了一个超级链接时，浏览器就向服务器发送了HTTP请求，此请求被送往由IP地址指定的URL。驻留程序接收到请求，在进行必要的操作后回送所要求的文件。</p>
-<blockquote>
-<p>HTTPS(Secure Hypertext Transfer Protocol)安全超文本传输协议</p>
-</blockquote>
-<p>它是由Netscape开发并内置于其浏览器中，用于对数据进行压缩和解压操作，并返回网络上传送回的结果。HTTPS实际上应用了Netscape的完全套接字层(SSL)作为HTTP应用层的子层。(HTTPS使用端口443，而不是象HTTP那样使用端口80来和TCP/IP进行通信。)SSL使用40 位关键字作为RC4流加密算法，这对于商业信息的加密是合适的。HTTPS和SSL支持使用X.509数字认证，如果需要的话用户可以确认发送者是谁。</p>
-<blockquote>
-<p>ICMP(Internet Control Message Protocol)Internet控制信息协议</p>
-</blockquote>
-<p>它是一个在主机和网关之间消息控制和差错报告协议。ICMP使用IP数据报，但消息由TCP/IP软件处理，对于应用程序使用者是不可见的。在被称为Catenet的系统中，IP协议被用作主机到主机的数据报服务。网络连接设备称为网关。这些网关通过网关到网关协议(GGP)相互交换用于控制的信息。通常，赡养或目的主机将和源主机通信，例如，为报告在数据报过程中的错误。为了这个目的才使用了ICMP，它使用IP做于底层支持，好象它是一个高层协议，而实际上它是IP的一部分，必须由其它IP模块实现。ICMP消息在以下几种情况下发送:当数据报不能到达目的地时，当网关的已经失去缓存功能，当网关能够引导主机在更短路由上发送。IP并非设计为设计为绝对可靠，这个协议的目的是为了当网络出现问题的时候返回控制信息，而不是使IP协议变得绝对可靠，并不保证数据报或控制信息能够返回。一些数据报仍将在没有任何报告的情况下丢失。</p>
-<blockquote>
-<p>IPv6(Internet Protocol Version 6)Internet协议-版本6</p>
-</blockquote>
-<p>它是Internet协议的最新版本，已作为IP的一部分并被许多主要的操作系统所支持。IPv6也被称为“Ipng”(下一代IP)，它对现行的IP(版本4)进行重大的改进。使用IPv4和IPv6的网络主机和中间结点可以处理IP协议中任何一层的包。用户和服务商可以直接安装IPv6而不用对系统进行什么重大的修改。相对于版本4新版本的最大改进在于将IP地址从32位改为128位，这一改进是为了适应网络快速的发展对IP地址的需求，也从根本上改变了IP地址短缺的问题。简化IPv4首部字段被删除或者成为可选字段，减少了一般情况下包的处理开销以及IPv6首部占用的带宽。改进IP 首部选项编码方式的修改导致更加高效的传输，在选项长度方面更少的限制，以及将来引入新的选项时更强的适应性。加入一个新的能力，使得那些发送者要求特殊处理的属于特别的传输流的包能够贴上标签，比如非缺省质量的服务或者实时服务。为支持认证，数据完整性以及(可选的)数据保密的扩展都在IPv6中说明。本文描述IPv6基本首部以及最初定义的IPv6 扩展首部和选项。还将讨论包的大小问题，数据流标签和传输类别的语法，以及IPv6对上层协议的影响。IPv6 地址的格式和语法在其它文章中单独说明。IPv6版的 ICMP 是所有IPv6应用都需要包含的。</p>
-<blockquote>
-<p>OSPF(Open Shortest Path First)开放最短路优先</p>
-</blockquote>
-<p>OSPF是用于大型自主网络中替代路由信息协议的协议标准。象RIP一样，OSPF也是由IETF设计用作内部网关协议族中的一个标准。在使用OSPF时网络拓朴结构的变化可以立即在路由器上反映出来。不象RIP，OSPF不是全部当前结点保存的路由表，而是通过最短路优先算法计算得到最短路，这样可以降低网络通信量。如果您熟悉最短路优先算法就会知道，它是一种只关心网络拓朴结构的算法，而不关心其它情况，如优先权的问题，对于这一点，OSPF改变了算法使它根据不同的情况给某些通路以优先权。</p>
-<blockquote>
-<p>POP3(Post Office Protocol Version 3)邮局协议-版本3</p>
-</blockquote>
-<p>它是一个关于接收电子邮件的客户/服务器协议。电子邮件由服务器接收并保存，在一定时间之后，由客户电子邮件接收程序检查邮箱并下载邮件。POP3它内置于IE和Netscape浏览器中。另一个替代协议是交互邮件访问协议(IMAP)。使用IMAP您可以将服务器上的邮件视为本地客户机上的邮件。在本地机上删除的邮件还可以从服务器上找到。E-mail 可以被保存在服务器上，并且可以从服务器上找回。</p>
-<blockquote>
-<p>PPP(Point to Point Protocol)点对点协议</p>
-</blockquote>
-<p>它是用于串行接口的两台计算机的通信协议，是为通过电话线连接计算机和服务器而彼此通信而制定的协议。网络服务提供商可以提供您点对点连接，这样提供商的服务器就可以响应您的请求，将您的请求接收并发送到网络上，然后将网络上的响应送回。PPP是使用IP协议，有时它被认为是TCP/IP协议族的一员。PPP协议可用于不同介质上包括双绞线，光纤和卫星传输的全双工协议，它使用HDLC进行包的装入。PPP协议既可以处理同步通信也可以处理异步通信，可以允许多个用户共享一个线路，又可发进行SLIP协议所没有的差错控制。</p>
-<blockquote>
-<p>RIP(Routing Infomation Protocol)路由信息协议</p>
-</blockquote>
-<p>RIP是最早的路由协议之一，而且现在仍然在广泛使用。它从类别上应该属于内部网关协议(IGP)类，它是距离向量路由式协议，这种协议在计算两个地方的距离时只计算经过的路由器的数目，如果到相同目标有两个不等速或带宽不同的路由器，但是经过的路由器的个数一样，RIP认为两者距离一样，而实际传送数据时，很明显一个快一个慢，这就是RIP协议的不足之处，而OSPF在它的基础上克服了RIP的缺点。</p>
-<blockquote>
-<p>SMTP(Simple Mail Transfer Protocol)简单邮件传送协议</p>
-</blockquote>
-<p>它是用来发送电子邮件的TCP/IP协议。它的内容由IETF的RFC 821定义。另外一个和SMTP相同功能的协议是X.400。SMTP的一个重要特点是它能够在传送中接力传送邮件，传送服务提供了进程间通信环境(IPCE)，此环境可以包括一个网络，几个网络或一个网络的子网。理解到传送系统(或IPCE)不是一对一的是很重要的。进程可能直接和其它进程通过已知的IPCE通信。邮件是一个应用程序或进程间通信。邮件可以通过连接在不同IPCE上的进程跨网络进行邮件传送。更特别的是，邮件可以通过不同网络上的主机接力式传送。</p>
-<blockquote>
-<p>TCP/IP(Transmission Control Protocol/Internet Protocol)传输控制协议/Internet协议</p>
-</blockquote>
-<p>TCP/IP协议起源于美国国防高级研究计划局。提供可靠数据传输的协议称为传输控制协议TCP，好比货物装箱单，保证数据在传输过程中不会丢失;提供无连接数据报服务的协议称为网络协议IP，好比收发货人的地址和姓名，保证数据到达指定的地点。TCP/IP协议是互联网上广泛使用的一种协议，使用TCP/IP协议的因特网等网络提供的主要服务有:电子邮件、文件传送、远程登录、网络文件系统、电视会议系统和万维网。它是Interent的基础，它提供了在广域网内的路由功能，而且使Internet上的不同主机可以互联。从概念上，它可以映射到四层:网络接口层，这一层负责在线路上传输帧并从线路上接收帧;Internet层，这一层中包括了IP协议，IP协议生成Internet数据报，进行必要的路由算法，IP协议实际上可以分为四部分:ARP，ICMP，IGMP和IP;再上向就是传输层，这一层负责管理计算机间的会话，这一层包括两个协议TCP和UDP，由应用程序的要求不同可以使用不同的协议进行通信;最后一层是应用层，就是我们熟悉的FTP，DNS，TELNET等。熟悉TCP/IP是熟悉Internet的必由之路。</p>
-<blockquote>
-<p>TELNET Protocol虚拟终端协议</p>
-</blockquote>
-<p>TELNET协议的目的是提供一个相对通用的，双向的，面向八位字节的通信方法，它主要的目标是允许接口终端设备的标准方法和面向终端的相互作用。是让用户在远程计算机登录，并使用远程计算机上对外开放的所有资源。</p>
-<blockquote>
-<p>Time Protocol时间协议</p>
-</blockquote>
-<p>该协议提供了一个独立于站点的，机器可读的日期和时间信息。时间服务返回的是以秒数，是从1900年1月1日午夜到现在的秒数。设计这个协议的一个重要目的在于，网络上的许多主机并没有时间的观念，在分布式的系统上，我们可以想一想，北京的时间和东京的时间如何分呢?主机的时间往往可以人为改变，而且因为机器时钟内的误差而变得不一致，因此需要使用时间服务器通过选举方式得到网络时间，让服务器有一个准确的时间观念。不要小看时间，这对于一些以时间为标准的分布运行的程序简单是太重要了。这个协议可以工作在TCP和UDP协议下。时间是由32位表示的，是自1900年1月1日0时到当前的秒数，我们可以计算一下，这个协议只能表示到2036年就不能用了，但是我们也知道计算机发展速度这么快，到时候可能就会有更好的协议代替这个协议。</p>
-<blockquote>
-<p>TFTP(Trivial File Transfer Protocol)小文件传输协议</p>
-</blockquote>
-<p>它是一个网络应用程序，它比FTP简单也比FTP功能少。它在不需要用户权限或目录可见的情况下使用，它使用UDP协议而不是TCP协议。</p>
-<blockquote>
-<p>UDP(User Datagram Protocol)用户数据报协议</p>
-</blockquote>
-<p>它是定义用来在互连网络环境中提供包交换的计算机通信的协议，此协议默认认为网路协议(IP)是其下层协议。UDP是TCP的另外一种方法，象TCP一样，UDP使用IP协议来获得数据单元(叫做数据报)，不象TCP的是，它不提供包(数据报)的分组和组装服务。而且，它还不提供对包的排序，这意味着，程序程序必须自己确定信息是否完全地正确地到达目的地。如果网络程序要加快处理速度，那使用UPD就比TCP要好。UDP提供两种不由IP层提供的服务，它提供端口号来区别不同用户的请求，而且可以提供奇偶校验。在OSI模式中，UDP和TCP一样处于第四层，传输层。</p>
 
       
     </div>
